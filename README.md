@@ -1,2 +1,2 @@
 # WSC
-WebSocket Server/Client
+WebSocket Server+Client
