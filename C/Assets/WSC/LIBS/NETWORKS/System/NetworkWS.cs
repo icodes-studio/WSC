@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebSocketSharp;
 
 namespace WSC
 {
@@ -10,7 +9,7 @@ namespace WSC
         private const int RECOVERY = 10;
 
         private int recoveryCount = RECOVERY;
-        private WebSocket socket = null;
+        private IWebSocket socket = null;
         private Queue<Pending> pendings = new Queue<Pending>();
         private Queue<Message> messages = new Queue<Message>();
         private Dictionary<string, Action<NetworkResponse>> callbacks = new Dictionary<string, Action<NetworkResponse>>();
@@ -49,26 +48,20 @@ namespace WSC
             Error
         }
 
-        public NetworkWS(string host)
+        public NetworkWS(string host, IWebSocketFactory factory)
         {
-            socket = new WebSocket(host);
+            socket = factory.Create(host);
             socket.OnOpen += OnSocketOpen;
             socket.OnMessage += OnSocketMessage;
             socket.OnError += OnSocketError;
             socket.OnClose += OnSocketClose;
-
-            if (socket.IsSecure == true)
-                socket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
-#if DEBUG
-            socket.Log.Level = WebSocketSharp.LogLevel.Trace;
-#endif
         }
 
-        protected virtual void OnSocketOpen(object sender, EventArgs e)
+        protected virtual void OnSocketOpen()
         {
             lock (sync)
             {
-                Log.Debug($"Socket({socket?.Url}) opend");
+                Log.Debug($"Socket({socket.Uri}) opend");
 
                 State = STATE.Connected;
 
@@ -82,23 +75,22 @@ namespace WSC
                     callback = OnOpen,
                     response = new NetworkResponse()
                     {
-                        Data = socket.Url.ToString(),
+                        Data = socket.Uri.ToString(),
                         Sender = this
                     }
                 });
+
+                recoveryCount = RECOVERY;
             }
         }
 
-        protected virtual void OnSocketMessage(object sender, MessageEventArgs e)
+        protected virtual void OnSocketMessage(string message)
         {
-            if (e.IsText == true)
-            {
-                if (OnHandleAnswer(e.Data))
-                    return;
+            if (OnHandleAnswer(message))
+                return;
 
-                if (OnHandleNotify(e.Data))
-                    return;
-            }
+            if (OnHandleNotify(message))
+                return;
         }
 
         private bool OnHandleAnswer(string data)
@@ -177,20 +169,20 @@ namespace WSC
             return true;
         }
 
-        protected virtual void OnSocketError(object sender, ErrorEventArgs e)
+        protected virtual void OnSocketError(string message)
         {
-            Log.Debug($"Socket({socket?.Url}) error({e?.Message})");
+            Log.Debug($"Socket({socket?.Uri}) error({message})");
         }
 
-        protected virtual void OnSocketClose(object sender, CloseEventArgs e)
+        protected virtual void OnSocketClose(ushort code)
         {
             lock (sync)
             {
-                Log.Debug($"Socket({socket?.Url}) closed({e?.Code})");
+                Log.Debug($"Socket({socket?.Uri}) closed({code})");
 
                 State = STATE.Closed;
 
-                if (e == null || e.Code != (ushort)CloseStatusCode.NoStatus)
+                if (code != (ushort)CloseStatusCode.Normal)
                 {
                     foreach (var callback in callbacks)
                     {
@@ -232,8 +224,8 @@ namespace WSC
                             callback = OnClose,
                             response = new NetworkResponse()
                             {
-                                Exception = new NetworkException((e == null) ? (int)NetworkError.Closed : e.Code),
-                                Data = socket.Url.ToString(),
+                                Exception = new NetworkException(code),
+                                Data = socket.Uri.ToString(),
                                 Sender = this
                             }
                         });
@@ -242,41 +234,25 @@ namespace WSC
             }
         }
 
-        private void Connect(bool recovering)
+        private async void Connect(bool recovering)
         {
             if (State == STATE.Closed)
             {
-                if (recovering == true)
-                    recoveryCount = recoveryCount - 1;
-                else
-                    recoveryCount = RECOVERY;
-
                 State = STATE.Connecting;
 
-                Log.Debug($"Connecting... {socket.Url}");
-#if NETCOREAPP
-                Task.Run(() => socket.Connect()).ContinueWith((task) =>
+                if (recovering == true)
                 {
-                    if (task.IsCompleted)
-                    {
-                        if (task.IsFaulted)
-                        {
-                            Log.Warning(task.Exception);
-                            OnSocketClose(socket, null);
-                        }
-                    }
-                });
-#else
-                try
-                {
-                    socket.ConnectAsync();
+                    Log.Debug($"Retring({recoveryCount})... {socket?.Uri}");
+                    recoveryCount = recoveryCount - 1;
+                    await Task.Delay(1000);
                 }
-                catch (Exception e)
+                else
                 {
-                    Log.Warning(e);
-                    OnSocketClose(socket, null);
+                    Log.Debug($"Connecting... {socket?.Uri}");
+                    recoveryCount = RECOVERY;
                 }
-#endif
+
+                socket?.Connect();
             }
         }
 
@@ -287,10 +263,11 @@ namespace WSC
 
         public void Close()
         {
-            pendings.Clear();
-            callbacks.Clear();
-            socket.CloseAsync();
+            pendings?.Clear();
+            callbacks?.Clear();
 
+            recoveryCount = 0;
+            socket?.Close();
             State = STATE.Closed;
         }
 
@@ -306,23 +283,9 @@ namespace WSC
                 if (callback != null)
                     callbacks.Add(index, callback);
 
-#if NETCOREAPP
-                Task.Run(() => socket.Send(payload)).ContinueWith((task) =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        if (task.IsFaulted)
-                        {
-                            Log.Warning(task.Exception);
-                            callbacks.Remove(index);
-                            OnSendFail(callback);
-                        }
-                    }
-                });
-#else
                 try
                 {
-                    socket.SendAsync(payload, result =>
+                    socket.Send(payload, result =>
                     {
                         if (result == false)
                         {
@@ -336,7 +299,6 @@ namespace WSC
                     Log.Warning(e);
                     OnSendFail(callback);
                 }
-#endif
             }
             else if (recovery == true)
             {
@@ -373,6 +335,8 @@ namespace WSC
 
         public void Dispatch()
         {
+            socket?.Dispatch();
+
             lock (sync)
             {
                 foreach (var message in messages)

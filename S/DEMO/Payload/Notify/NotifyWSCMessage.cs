@@ -1,13 +1,11 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace WSC
+﻿namespace WSC.DEMO
 {
     public class NotifyWSCMessage : NotifyWSC<NotifyWSCMessage>
     {
         public long type;
         public string message;
 
-        [ModuleInitializer]
+        [RuntimeInitialize]
         internal static void Initialize()
         {
             Register();

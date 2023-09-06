@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace WSC
+namespace WSC.DEMO
 {
     public static class WSCInfo
     {

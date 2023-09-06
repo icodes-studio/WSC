@@ -5,10 +5,19 @@ namespace WSC
 {
     public sealed class NetworkWSClient : System<NetworkWSClient>
     {
+        private IWebSocketFactory factory = new WebSocketFactory();
         private Dictionary<string, NetworkWS> sockets = new Dictionary<string, NetworkWS>();
         public event Action<NetworkResponse> OnMessage = delegate { };
         public event Action<NetworkResponse> OnClose = delegate { };
         public event Action<NetworkResponse> OnOpen = delegate { };
+
+        public NetworkWSClient Initialize(IWebSocketFactory factory = null)
+        {
+            if (factory != null)
+                this.factory = factory;
+
+            return this;
+        }
 
         public void Query(RequestWS payload)
         {
@@ -94,7 +103,7 @@ namespace WSC
         {
             if (sockets.TryGetValue(host, out var socket) == false)
             {
-                socket = new NetworkWS(host);
+                socket = new NetworkWS(host, factory);
                 socket.OnNotify += OnNotify;
                 socket.OnOpen += (response) => OnOpen(response);
                 socket.OnClose += (response) => OnClose(response);
@@ -142,7 +151,6 @@ namespace WSC
         protected override void OnDestroy()
         {
             CloseAll();
-
             base.OnDestroy();
         }
     }

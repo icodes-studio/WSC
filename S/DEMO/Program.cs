@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WebSocketSharp.Server;
 
-namespace WSC
+namespace WSC.DEMO
 {
     class Program : Singleton<Program>
     {
@@ -24,10 +24,11 @@ namespace WSC
 
             Trace.Listeners.Add(new ConsoleTraceListener());
             config = Tools.FromJson<AppConfig>(File.ReadAllText(Tools.FullPath("S.Config.json")));
-            Log.Initialize(config.LogPath, nameof(WSC), config.LogLevel, (_, message) =>
-            {
-                Trace.WriteLine(message);
-            });
+            Log.Initialize(config.LogPath, nameof(WSC), config.LogLevel, (_, message) => Trace.WriteLine(message));
+
+            NetworkW3Client.i.Initialize();
+            NetworkWSClient.i.Initialize();
+            RuntimeInitializeAttribute.Initialize();
 
             timer = new((state) => { NetworkWSClient.i.Update(); }, null, 0, 100);
         }
@@ -250,13 +251,10 @@ namespace WSC
 #if NETCOREAPP
             Task.Run(() => sessions.SendTo(message, id)).ContinueWith((task) =>
             {
-                if (task.IsCompleted)
-                {
-                    if (task.IsFaulted)
-                        Log.Error(task.Exception);
-                    else
-                        completed?.Invoke();
-                }
+                if (task.IsCompletedSuccessfully)
+                    completed?.Invoke();
+                else
+                    Log.Error(task.Exception);
             });
 #else
             try

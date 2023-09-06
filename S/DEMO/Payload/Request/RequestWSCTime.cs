@@ -1,10 +1,8 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace WSC
+﻿namespace WSC.DEMO
 {
     public class RequestWSCTime : RequestWSC<RequestWSCTime>
     {
-        [ModuleInitializer]
+        [RuntimeInitialize]
         internal static void Initialize()
         {
             Register();

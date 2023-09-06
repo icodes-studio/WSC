@@ -2,7 +2,7 @@
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
-namespace WSC
+namespace WSC.DEMO
 {
     class WSC : WebSocketBehavior
     {

@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace WSC
+﻿namespace WSC.DEMO
 {
     public class RequestWSCLogin : RequestWSC<RequestWSCLogin>
     {
@@ -13,7 +11,7 @@ namespace WSC
             device = WSCInfo.DeviceModel;
         }
 
-        [ModuleInitializer]
+        [RuntimeInitialize]
         internal static void Initialize()
         {
             Register();

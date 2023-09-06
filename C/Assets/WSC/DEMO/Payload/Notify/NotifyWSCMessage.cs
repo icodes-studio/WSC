@@ -1,13 +1,11 @@
-﻿using UnityEngine;
-
-namespace WSC
+﻿namespace WSC.DEMO
 {
     public class NotifyWSCMessage : NotifyWSC<NotifyWSCMessage>
     {
         public long type;
         public string message;
 
-        [RuntimeInitializeOnLoadMethod]
+        [RuntimeInitialize]
         internal static void Initialize()
         {
             Register();

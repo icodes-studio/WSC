@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WSC
+namespace WSC.DEMO
 {
     public class RequestWSC :
 #if W3C

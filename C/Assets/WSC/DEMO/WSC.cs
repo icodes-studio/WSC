@@ -1,12 +1,13 @@
 using UnityEngine;
 
-namespace WSC
+namespace WSC.DEMO
 {
     public class WSC : MonoBehaviour
     {
         private void Awake()
         {
             Application.runInBackground = true;
+
             Log.Initialize(string.Empty, string.Empty, LogLevel.Debug, (level, message) =>
             {
                 switch (level)
@@ -27,6 +28,10 @@ namespace WSC
                         break;
                 }
             });
+
+            NetworkW3Client.i.Initialize();
+            NetworkWSClient.i.Initialize();// new WebSocketFactory());
+            RuntimeInitializeAttribute.Initialize();
         }
 
         private void Start()
@@ -72,6 +77,7 @@ namespace WSC
                 .Done += exception =>
                 {
                     Log.Debug($"TEST#5 error: {exception?.ToString()}");
+                    //NetworkWSClient.i.CloseAll();
                 };
         }
     }

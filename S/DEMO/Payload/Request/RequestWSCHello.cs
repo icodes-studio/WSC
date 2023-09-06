@@ -1,12 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace WSC
+﻿namespace WSC.DEMO
 {
     public class RequestWSCHello : RequestWSC<RequestWSCHello>
     {
         public string message;
 
-        [ModuleInitializer]
+        [RuntimeInitialize]
         internal static void Initialize()
         {
             Register();
