@@ -5,10 +5,12 @@
         public IWebSocket Create(string uri)
         {
 #if WEBSOCKETSHARP
-            Log.Debug("WSC.WebSocket activated");
+            // https://github.com/sta/websocket-sharp
+            Log.Debug("WSC.WebSocket(WebSocketSharp) activated");
             return new global::WSC.WebSocket(uri);
 #else
-            Log.Debug("WSC.DEMO.WebSocket activated");
+            // https://github.com/endel/NativeWebSocket
+            Log.Debug("WSC.DEMO.WebSocket(NativeWebSocket) activated");
             return new global::WSC.DEMO.WebSocket(uri);
 #endif
         }

@@ -3,39 +3,7 @@ using System.Threading.Tasks;
 
 namespace WSC
 {
-    public enum CloseStatusCode : ushort
-    {
-        NotSet = 0,
-        Normal = 1000,
-        Away = 1001,
-        ProtocolError = 1002,
-        UnsupportedData = 1003,
-        Undefined = 1004,
-        NoStatus = 1005,
-        Abnormal = 1006,
-        InvalidData = 1007,
-        PolicyViolation = 1008,
-        TooBig = 1009,
-        MandatoryExtension = 1010,
-        ServerError = 1011,
-        TlsHandshakeFailure = 1015
-    }
-
-    public interface IWebSocket
-    {
-        event Action<ushort> OnClose;
-        event Action<string> OnError;
-        event Action<string> OnMessage;
-        event Action OnOpen;
-
-        Uri Uri { get; }
-        void Connect();
-        void Send(string message, Action<bool> result);
-        void Close();
-        void Dispatch();
-    }
-
-    public class WebSocket : IWebSocket
+    public sealed class WebSocket : IWebSocket
     {
         private WebSocketSharp.WebSocket socket = null;
 

@@ -1,8 +1,12 @@
-﻿using System;
+﻿#if UNITY_5_6_OR_NEWER
+#define UNITY
+#endif
+
+using System;
 using System.Text;
 using System.Collections.Generic;
 
-#if UNITY_5_6_OR_NEWER
+#if UNITY
 using UnityEngine.Networking;
 #else
 using System.IO;
@@ -19,7 +23,7 @@ namespace WSC
         public const string POST = "POST";
         public const string DELETE = "DELETE";
 
-#if UNITY_5_6_OR_NEWER
+#if UNITY
         public static UnityWebRequest Request(RequestW3 payload)
         {
             var www = payload.method switch

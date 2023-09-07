@@ -30,7 +30,7 @@ namespace WSC.DEMO
             });
 
             NetworkW3Client.i.Initialize();
-            NetworkWSClient.i.Initialize();// new WebSocketFactory());
+            NetworkWSClient.i.Initialize(new WebSocketFactory());
             RuntimeInitializeAttribute.Initialize();
         }
 
@@ -77,7 +77,6 @@ namespace WSC.DEMO
                 .Done += exception =>
                 {
                     Log.Debug($"TEST#5 error: {exception?.ToString()}");
-                    //NetworkWSClient.i.CloseAll();
                 };
         }
     }
