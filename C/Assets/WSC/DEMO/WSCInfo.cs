@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using System.Threading;
 
 namespace WSC.DEMO
 {
@@ -13,11 +13,14 @@ namespace WSC.DEMO
         }
 
         public static string AccessToken { get; set; } = string.Empty;
-        public static string Platform => Application.platform.ToString();
-        public static string DeviceModel => SystemInfo.deviceModel;
-        public static string DeviceID => SystemInfo.deviceUniqueIdentifier;
-        public static string Locale => Application.systemLanguage.ToString();
-        public static string Version => Application.version;
+        public static string Platform => Environment.OSVersion.Platform.ToString();
+        public static string DeviceModel => Environment.OSVersion.ToString();
+        public static string DeviceID => Environment.OSVersion.VersionString;
+        public static string DeviceName => Environment.MachineName;
+        public static string Locale => Thread.CurrentThread.CurrentCulture.Name;
+        public static string Version => Environment.Version.ToString();
         public static string Host => "localhost:4649/WSC/";
+        public static string WSHost => $"ws://{Host}?name={DeviceName}";
+        public static string W3Host => $"http://{Host}";
     }
 }

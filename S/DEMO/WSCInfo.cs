@@ -16,8 +16,11 @@ namespace WSC.DEMO
         public static string Platform => Environment.OSVersion.Platform.ToString(); 
         public static string DeviceModel => Environment.OSVersion.ToString();
         public static string DeviceID => Environment.OSVersion.VersionString;
+        public static string DeviceName => Environment.MachineName;
         public static string Locale => Thread.CurrentThread.CurrentCulture.Name;
         public static string Version => Environment.Version.ToString();
-        public static string Host => "localhost:5000/WSC/";
+        public static string Host => "localhost:4649/WSC/";
+        public static string WSHost => $"ws://{WSCInfo.Host}?name={WSCInfo.DeviceName}";
+        public static string W3Host => $"http://{WSCInfo.Host}";
     }
 }

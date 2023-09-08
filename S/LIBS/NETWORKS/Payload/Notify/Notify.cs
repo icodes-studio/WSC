@@ -4,7 +4,7 @@ namespace WSC
 {
     public class Notify : Answer
     {
-        public string command;
+        public string command = string.Empty;
         [JsonIgnore] internal string host = string.Empty;
     }
 }

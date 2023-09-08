@@ -8,7 +8,7 @@ namespace WSC.DEMO
     {
         protected override void OnOpen()
         {
-            Log.Debug($"{ID}");
+            Log.Debug($"{ID}({QueryString["name"]})");
         }
 
         protected override void OnClose(CloseEventArgs e)

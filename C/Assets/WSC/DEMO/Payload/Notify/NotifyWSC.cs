@@ -5,7 +5,7 @@ namespace WSC.DEMO
         public NotifyWSC()
         {
             command = GetType().Name;
-            host = "ws://" + WSCInfo.Host;
+            host = WSCInfo.WSHost;
         }
     }
 }

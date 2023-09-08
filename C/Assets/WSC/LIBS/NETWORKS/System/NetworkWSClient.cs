@@ -19,12 +19,13 @@ namespace WSC
             return this;
         }
 
-        public void Query(RequestWS payload)
+        public NetworkWSClient Query(RequestWS payload)
         {
             OnQuery(payload, null);
+            return this;
         }
 
-        public void Query<T>(RequestWS request, Action<T> callback) where T : Answer
+        public NetworkWSClient Query<T>(RequestWS request, Action<T> callback) where T : Answer
         {
             OnQuery(request, (response) =>
             {
@@ -64,6 +65,8 @@ namespace WSC
                     }
                 }
             });
+
+            return this;
         }
 
         private void OnQuery(RequestWS request, Action<NetworkResponse> callback)
@@ -113,16 +116,6 @@ namespace WSC
             return socket;
         }
 
-        public void RegisterNotify(Type type)
-        {
-            Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type);
-        }
-
-        public void RegisterNotify(Type type, string command)
-        {
-            Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type, command);
-        }
-
         public void Update()
         {
             var backup = new Dictionary<string, NetworkWS>(sockets);
@@ -130,22 +123,39 @@ namespace WSC
                 socket.Dispatch();
         }
 
-        public void Connect(string host)
+        public NetworkWSClient RegisterNotify(Type type)
         {
-            Socket(host).Connect();
+            Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type);
+            return this;
         }
 
-        public void Close(string host)
+        public NetworkWSClient RegisterNotify(Type type, string command)
+        {
+            Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type, command);
+            return this;
+        }
+
+        public NetworkWSClient Connect(string host)
+        {
+            Socket(host).Connect();
+            return this;
+        }
+
+        public NetworkWSClient Close(string host)
         {
             if (sockets.TryGetValue(host, out var socket))
                 socket.Close();
+
+            return this;
         }
 
-        public void CloseAll()
+        public NetworkWSClient CloseAll()
         {
             var backup = new Dictionary<string, NetworkWS>(sockets);
             foreach (var socket in backup.Values)
                 socket.Close();
+
+            return this;
         }
 
         protected override void OnDestroy()

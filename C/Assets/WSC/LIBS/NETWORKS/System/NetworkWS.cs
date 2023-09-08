@@ -142,11 +142,8 @@ namespace WSC
                     if (notify == null)
                         return false;
 
-                    var command = notify.command;
-                    if (string.IsNullOrEmpty(command))
-                        return false;
-
-                    if (!notifications.TryGetValue(command, out var notification) && !notifications.TryGetValue(string.Empty, out notification))
+                    var command = notify.command ?? string.Empty;
+                    if (!notifications.TryGetValue(command, out var notification))
                         return false;
 
                     messages.Enqueue(new Message()

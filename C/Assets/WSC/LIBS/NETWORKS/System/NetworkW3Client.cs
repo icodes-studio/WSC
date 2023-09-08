@@ -22,12 +22,13 @@ namespace WSC
             return this;
         }
 
-        public void Query(RequestW3 request)
+        public NetworkW3Client Query(RequestW3 request)
         {
             Query(request, null);
+            return this;
         }
 
-        public void Query<T>(RequestW3 request, Action<T> callback) where T : Answer
+        public NetworkW3Client Query<T>(RequestW3 request, Action<T> callback) where T : Answer
         {
             Query(request, (response) =>
             {
@@ -67,6 +68,8 @@ namespace WSC
                     }
                 }
             });
+
+            return this;
         }
 
         private void Query(RequestW3 request, Action<NetworkResponse> callback)

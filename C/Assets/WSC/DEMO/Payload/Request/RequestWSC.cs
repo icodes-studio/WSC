@@ -20,14 +20,14 @@ namespace WSC.DEMO
             platform = WSCInfo.Platform;
             locale = WSCInfo.Locale;
 #if W3C
-            host = "http://" + WSCInfo.Host;
+            host = WSCInfo.W3Host;
             headers = new Dictionary<string, string>
             {
                 {"Authorization", string.Format("Bearer {0}", WSCInfo.AccessToken)},
                 {"Content-Type", "application/json"}
             };
 #else
-            host = "ws://" + WSCInfo.Host;
+            host = WSCInfo.WSHost;
 #endif
         }
     }
