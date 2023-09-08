@@ -4,7 +4,6 @@ AWS.config.update({
 });
 exports.handler = async function (event, context) {
     var docClient = new AWS.DynamoDB.DocumentClient();
-    //채팅 메세지를 가져온다.
     var params = {
         TableName: 'chatapp-chat-messages',
         KeyConditionExpression: '#HashKey = :hkey',
@@ -38,7 +37,6 @@ exports.handler = async function (event, context) {
             },
             body: JSON.stringify("error")
         };
-        //console.log(response);
         return response;
     }
 }

@@ -4,7 +4,6 @@ exports.handler = async (event, context) => {
     var docClient = new AWS.DynamoDB.DocumentClient();
     const inputObject = JSON.parse(event.body);
 
-    //우선 해당 채팅방의 접속한 모든 유저를 가져온다.
     var params = {
         TableName: 'chatapp-userlist',
         IndexName: 'roomId-userId-index',
@@ -17,7 +16,6 @@ exports.handler = async (event, context) => {
     const result = await docClient.query(params).promise();
     const now = moment().valueOf();
 
-    //채팅을 DB에 저장한다.
     const item = {
         roomId: inputObject.roomId,
         timestamp: now,
@@ -31,7 +29,6 @@ exports.handler = async (event, context) => {
     };
     await docClient.put(params).promise();
 
-    //이전에 불러온 방에 접속한 유저들 모두에게 채팅을 보낸다.
     const apigwManagementApi = new AWS.ApiGatewayManagementApi({
         apiVersion: '2018-11-29',
         endpoint: `${process.env.socket_api_gateway_id}.execute-api.ap-northeast-2.amazonaws.com/dev`
@@ -43,7 +40,6 @@ exports.handler = async (event, context) => {
                 await apigwManagementApi.postToConnection(dt).promise();
             } catch (e) {
                 console.log(e);
-                //만약 이 접속은 끊긴 접속이라면, DB에서 삭제한다.
                 if (e.statusCode === 410) {
                     console.log(`Found stale connection, deleting ${connectionId}`);
                     var params = {

@@ -4,7 +4,6 @@ exports.handler = async (event) => {
     let inputObject = event.queryStringParameters;
     var docClient = new AWS.DynamoDB.DocumentClient();
 
-    //웹소켓에 접속하면 부여되는 connectionId를 DB에 저장한다.
     const item = {
         roomId: inputObject.roomId,
         connectionId: event.requestContext.connectionId,
