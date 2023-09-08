@@ -2,10 +2,6 @@
 #define UNITY
 #endif
 
-#if UNITY
-using UnityEngine;
-#endif
-
 using System.Threading;
 
 namespace WSC
@@ -20,7 +16,7 @@ namespace WSC
             NetworkW3Client.i.Initialize();
             NetworkWSClient.i.Initialize(factory);
 #if UNITY
-            Application.runInBackground = true;
+            UnityEngine.Application.runInBackground = true;
 #else
             timer = new((state) => { NetworkWSClient.i.Update(); }, null, 0, 100);
 #endif
