@@ -11,12 +11,10 @@ namespace WSC
         public event Action<NetworkResponse> OnClose = delegate { };
         public event Action<NetworkResponse> OnOpen = delegate { };
 
-        public NetworkWSClient Initialize(IWebSocketFactory factory = null)
+        public void Initialize(IWebSocketFactory factory = null)
         {
             if (factory != null)
                 this.factory = factory;
-
-            return this;
         }
 
         public NetworkWSClient Query(RequestWS payload)

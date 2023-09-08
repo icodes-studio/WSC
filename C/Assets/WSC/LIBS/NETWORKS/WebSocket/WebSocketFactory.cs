@@ -25,7 +25,7 @@ namespace WSC
     {
         public IWebSocket Create(string uri)
         {
-            Log.Debug("WSC.WebSocket(WebSocketSharp) activated");
+            Log.Debug($"WSC.WebSocket(WebSocketSharp) activated with {uri}");
             return new WSC.WebSocket(uri);
         }
     }

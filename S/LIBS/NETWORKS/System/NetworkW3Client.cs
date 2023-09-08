@@ -17,9 +17,9 @@ namespace WSC
 {
     public sealed class NetworkW3Client : System<NetworkW3Client>
     {
-        public NetworkW3Client Initialize()
+        public void Initialize()
         {
-            return this;
+            // N/A
         }
 
         public NetworkW3Client Query(RequestW3 request)

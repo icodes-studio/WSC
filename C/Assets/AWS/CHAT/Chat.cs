@@ -7,8 +7,6 @@ namespace AWS.CHAT
     {
         private void Awake()
         {
-            Application.runInBackground = true;
-
             Log.Initialize(string.Empty, string.Empty, LogLevel.Debug, (level, message) =>
             {
                 switch (level)
@@ -30,9 +28,7 @@ namespace AWS.CHAT
                 }
             });
 
-            //NetworkW3Client.i.Initialize();
-            //NetworkWSClient.i.Initialize(new WSC.DEMO.WebSocketFactory());
-            RuntimeInitializeAttribute.Initialize();
+            WSC.Network.Initialize(new WSC.DEMO.WebSocketFactory());
         }
 
         private void Start()
@@ -45,9 +41,14 @@ namespace AWS.CHAT
                         Log.Debug($"roomId:{message.roomId}, userId:{message.userId}, message:{message.message}, timestamp:{message.timestamp}");
 
                     new RequestChatMessage() { text = "Hello World" }.Query<AnswerChatMessage>((answer) =>
-                        Log.Debug("Done"));
+                        Log.Debug("Transfer completed."));
                 });
              };
+
+            NotifyChatMessage.OnNotify += (notify) =>
+            {
+                Log.Debug($"roomId:{notify.roomId}, userId:{notify.userId}, name:{notify.name}, message:{notify.message}, timestamp:{notify.timestamp}");
+            };
         }
     }
 }

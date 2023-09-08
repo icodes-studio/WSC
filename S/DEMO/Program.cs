@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using WebSocketSharp.Server;
 
@@ -16,7 +15,6 @@ namespace WSC.DEMO
         private WebSocketSessionManager sessions = null;
         private Dictionary<string, Type> handlers = new();
         private AppConfig config = null;
-        private Timer timer = null;
 
         protected override void Awake()
         {
@@ -26,11 +24,7 @@ namespace WSC.DEMO
             config = Tools.FromJson<AppConfig>(File.ReadAllText(Tools.FullPath("S.Config.json")));
             Log.Initialize(config.LogPath, nameof(WSC), config.LogLevel, (_, message) => Trace.WriteLine(message));
 
-            NetworkW3Client.i.Initialize();
-            NetworkWSClient.i.Initialize();
-            RuntimeInitializeAttribute.Initialize();
-
-            timer = new((state) => { NetworkWSClient.i.Update(); }, null, 0, 100);
+            Network.Initialize();
         }
 
         public bool Start()

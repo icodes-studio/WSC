@@ -1,3 +1,4 @@
+using System;
 using WSC;
 
 namespace AWS.CHAT
@@ -20,7 +21,9 @@ namespace AWS.CHAT
         {
             base.OnQuery(request);
 
-            Log.Debug($"roomId:{roomId}, userId:{userId}, name:{name}, message:{message}, timestamp:{timestamp}");
+            OnNotify?.Invoke(this);
         }
+
+        public static event Action<NotifyChatMessage> OnNotify;
     }
 }

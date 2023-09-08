@@ -6,8 +6,6 @@ namespace WSC.DEMO
     {
         private void Awake()
         {
-            Application.runInBackground = true;
-
             Log.Initialize(string.Empty, string.Empty, LogLevel.Debug, (level, message) =>
             {
                 switch (level)
@@ -29,9 +27,7 @@ namespace WSC.DEMO
                 }
             });
 
-            NetworkW3Client.i.Initialize();
-            NetworkWSClient.i.Initialize(new WebSocketFactory());
-            RuntimeInitializeAttribute.Initialize();
+            Network.Initialize(new global::WSC.DEMO.WebSocketFactory());
         }
 
         private void Start()
