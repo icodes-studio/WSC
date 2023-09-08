@@ -228,6 +228,10 @@ namespace WSC
                         });
                     }
                 }
+                else
+                {
+                    // TODO: 명시적으로 Close 했을 때 pending 처리 OnClose 처리를 해야 할지 말지 고민된다.
+                }
             }
         }
 

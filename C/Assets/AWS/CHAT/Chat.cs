@@ -35,6 +35,8 @@ namespace AWS.CHAT
         {
             NetworkWSClient.i.Connect(ChatInfo.WSHost).OnOpen += (response) =>
             {
+                Log.Debug($"Socket Connected: {response.Data}");
+
                 new RequestChatHistory().Query<AnswerChatHistory>((answer) =>
                 {
                     foreach (var message in answer.messages)
@@ -48,6 +50,11 @@ namespace AWS.CHAT
             NotifyChatMessage.OnNotify += (notify) =>
             {
                 Log.Debug($"roomId:{notify.roomId}, userId:{notify.userId}, name:{notify.name}, message:{notify.message}, timestamp:{notify.timestamp}");
+            };
+
+            NetworkWSClient.i.OnClose += (response) =>
+            {
+                Log.Debug($"Socket Closed: {response.Data}");
             };
         }
     }
