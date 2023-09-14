@@ -179,7 +179,11 @@ namespace WSC
 
                 State = STATE.Closed;
 
-                if (code != (ushort)CloseStatusCode.Normal)
+                if (code == (ushort)CloseStatusCode.Normal)
+                {
+                    // When explicitly closed
+                }
+                else
                 {
                     foreach (var callback in callbacks)
                     {
