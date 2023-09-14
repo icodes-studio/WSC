@@ -243,7 +243,7 @@
         - *chatapp-onConnect* > *src/lambda/chat/onConnect.handler*
         - *chatapp-onDisconnect* > *src/lambda/chat/onDisconnect.handler*
     - ***마지막으로, chatapp-message-put 람다에서 사용하는 환경변수를 등록해야 한다***
-    - ***put.js*** > ***socket_api_gateway_id***
+    - ***put.js*** *코드에서* ***socket_api_gateway_id*** *환경 변수 사용하는 부분을 확인 할 수 있다*
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/AWS/Chat%20(API%2BLambda%2BDynamoDB)/Assets/22.png)
     - ***즉, Websocket API Gateway ID를 환경변수에 추가해야 한다.***
     - *API Gateway 콘솔로 돌아와서* > ***chatapp-websocket API의 ID 복사***
