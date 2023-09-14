@@ -6,7 +6,7 @@ namespace AWS.CHAT
     {
         public RequestChatHistory()
         {
-            method = NetworkW3.GET;
+            method = WebRequestTypes.GET;
         }
     }
 }

@@ -1,5 +1,10 @@
 ﻿namespace WSC
 {
+    public static class NetworkTypes
+    {
+        public const int RECOVERY = 10;
+    }
+
     public enum NetworkError
     {
         Success = 0,

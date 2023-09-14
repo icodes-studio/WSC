@@ -42,8 +42,9 @@ namespace WSC
         }
 
         [JsonIgnore] internal string command { get; set; } = string.Empty;
-        [JsonIgnore] internal string method { get; set; } = NetworkW3.POST;
+        [JsonIgnore] internal string method { get; set; } = WebRequestTypes.POST;
         [JsonIgnore] internal string uri => host + command;
         [JsonIgnore] internal Dictionary<string, string> headers = null;
+        [JsonIgnore] internal int recovery = NetworkTypes.RECOVERY;
     }
 }

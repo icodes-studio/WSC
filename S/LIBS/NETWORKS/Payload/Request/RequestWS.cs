@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace WSC
 {
@@ -47,5 +48,7 @@ namespace WSC
 
             return this;
         }
+
+        [JsonIgnore] internal bool recovery = true;
     }
 }

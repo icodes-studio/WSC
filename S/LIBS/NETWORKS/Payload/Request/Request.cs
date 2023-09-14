@@ -21,6 +21,5 @@ namespace WSC
 
         [JsonIgnore] public Action<Answer> Done = delegate { };
         [JsonIgnore] internal string host = string.Empty;
-        [JsonIgnore] internal bool recovery = true;
     }
 }

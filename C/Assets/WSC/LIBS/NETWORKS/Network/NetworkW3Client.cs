@@ -1,36 +1,26 @@
-﻿#if UNITY_5_6_OR_NEWER
-#define UNITY
-#endif
-
-using System;
-
-#if UNITY
-using System.Collections;
-using UnityEngine.Networking;
-#else
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
-#endif
+﻿using System;
 
 namespace WSC
 {
     public sealed class NetworkW3Client : System<NetworkW3Client>
     {
-        public void Initialize()
+        private IWeb www = new WSC.WebRequest();
+
+        public void Initialize(IWeb www = null)
         {
-            // N/A
+            if (www != null)
+                this.www = www;
         }
 
         public NetworkW3Client Query(RequestW3 request)
         {
-            Query(request, null);
+            www.Query(request, null);
             return this;
         }
 
         public NetworkW3Client Query<T>(RequestW3 request, Action<T> callback) where T : Answer
         {
-            Query(request, (response) =>
+            www.Query(request, (response) =>
             {
                 if (response.Exception == null)
                 {
@@ -71,114 +61,5 @@ namespace WSC
 
             return this;
         }
-
-        private void Query(RequestW3 request, Action<NetworkResponse> callback)
-        {
-#if UNITY
-            StartCoroutine(OnQuery(request, callback));
-#else
-            OnQuery(request, callback);
-#endif
-        }
-
-#if UNITY
-        private IEnumerator OnQuery(RequestW3 request, Action<NetworkResponse> callback)
-        {
-            Log.Debug($"WWW request, method: {request.method}, uri: {request.uri}, {Tools.ToJson(request)}");
-
-            using (var www = NetworkW3.Request(request))
-            {
-                yield return www.SendWebRequest();
-
-                if (www.result != UnityWebRequest.Result.Success)
-                {
-                    Log.Debug($"WWW response error, uri: {request.uri}, error: {www.responseCode}");
-
-                    int error = (www.responseCode == 0) ? (int)NetworkError.Network : (int)www.responseCode;
-                    callback?.Invoke(new NetworkResponse()
-                    {
-                        Exception = new NetworkException(error, www.error),
-                        Sender = this
-                    });
-                }
-                else
-                {
-                    Log.Debug($"WWW response, uri: {request.uri}, contents: {www.downloadHandler.text}");
-
-                    callback?.Invoke(new NetworkResponse()
-                    {
-                        Data = www.downloadHandler.text,
-                        Sender = this
-                    });
-                }
-            }
-        }
-#else
-        private void OnQuery(RequestW3 request, Action<NetworkResponse> callback)
-        {
-            Task.Run(() =>
-            {
-                NetworkResponse result = null;
-
-                try
-                {
-                    Log.Debug($"WWW request, method: {request.method}, uri: {request.uri}, {Tools.ToJson(request)}");
-
-                    var www = NetworkW3.Request(request);
-                    var response = (HttpWebResponse)www.GetResponse();
-
-                    if (response.StatusCode != HttpStatusCode.OK)
-                        throw new NetworkException((int)response.StatusCode, response.StatusDescription);
-
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
-                            result = new NetworkResponse()
-                            {
-                                Exception = null,
-                                Data = reader.ReadToEnd(),
-                                Sender = this
-                            };
-                        }
-                    }
-                }
-                catch (WebException e)
-                {
-                    int error = (e.Status == WebExceptionStatus.Success) ? (int)NetworkError.Network : (int)e.Status;
-                    result = new NetworkResponse()
-                    {
-                        Exception = new NetworkException(error, e.ToString()),
-                        Sender = this
-                    };
-                }
-                catch (NetworkException e)
-                {
-                    result = new NetworkResponse()
-                    {
-                        Exception = e,
-                        Sender = this
-                    };
-                }
-                catch (Exception e)
-                {
-                    result = new NetworkResponse()
-                    {
-                        Exception = new NetworkException(NetworkError.Network, e.ToString()),
-                        Sender = this
-                    };
-                }
-                finally
-                {
-                    if (result.Exception != null)
-                        Log.Debug($"WWW response uri: {request.uri}, error: {result.Exception.HResult}");
-                    else
-                        Log.Debug($"WWW response uri: {request.uri}, contents: {result.Data}");
-
-                    callback?.Invoke(result);
-                }
-            });
-        }
-#endif
     }
 }

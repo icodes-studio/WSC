@@ -1,8 +1,8 @@
 ﻿#if UNITY_5_6_OR_NEWER
 #define UNITY
-#endif
-
+#else
 using System.Threading;
+#endif
 
 namespace WSC
 {
@@ -11,9 +11,9 @@ namespace WSC
 #if !UNITY
         private static Timer timer;
 #endif
-        public static void Initialize(IWebSocketFactory factory = null)
+        public static void Initialize(IWeb www = null, IWebSocketFactory factory = null)
         {
-            NetworkW3Client.i.Initialize();
+            NetworkW3Client.i.Initialize(www);
             NetworkWSClient.i.Initialize(factory);
 #if UNITY
             UnityEngine.Application.runInBackground = true;
