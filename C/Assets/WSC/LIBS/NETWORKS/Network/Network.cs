@@ -20,6 +20,7 @@ namespace WSC
 #else
             timer = new((state) => { NetworkWSClient.i.Update(); }, null, 0, 100);
 #endif
+            RuntimeInitializeAttribute.Initialize();
         }
 
         public static void Release()

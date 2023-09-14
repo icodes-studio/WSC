@@ -35,26 +35,26 @@ namespace AWS.CHAT
         {
             NetworkWSClient.i.Connect(ChatInfo.WSHost).OnOpen += (response) =>
             {
-                Log.Debug($"Socket Connected: {response.Data}");
+                Log.Debug($"Connected Socket({response.Data})");
 
                 new RequestChatHistory().Query<AnswerChatHistory>((answer) =>
                 {
                     foreach (var message in answer.messages)
-                        Log.Debug($"roomId:{message.roomId}, userId:{message.userId}, message:{message.message}, timestamp:{message.timestamp}");
+                        Log.Debug($"[History] roomId:{message.roomId}, userId:{message.userId}, message:{message.message}, timestamp:{message.timestamp}");
 
                     new RequestChatMessage() { text = "Hello World" }.Query<AnswerChatMessage>((answer) =>
-                        Log.Debug("Transfer completed."));
+                        Log.Debug("[Send] Transfer completed."));
                 });
              };
 
             NotifyChatMessage.OnNotify += (notify) =>
             {
-                Log.Debug($"roomId:{notify.roomId}, userId:{notify.userId}, name:{notify.name}, message:{notify.message}, timestamp:{notify.timestamp}");
+                Log.Debug($"[Message] roomId:{notify.roomId}, userId:{notify.userId}, name:{notify.name}, message:{notify.message}, timestamp:{notify.timestamp}");
             };
 
             NetworkWSClient.i.OnClose += (response) =>
             {
-                Log.Debug($"Socket Closed: {response.Data}");
+                Log.Debug($"Closed Socket({response.Data})");
             };
         }
     }

@@ -84,7 +84,7 @@ namespace WSC
 #if UNITY
         private IEnumerator OnQuery(RequestW3 request, Action<NetworkResponse> callback)
         {
-            Log.Debug($"WWW request, uri: {request.uri}, {Tools.ToJson(request)}");
+            Log.Debug($"WWW request, method: {request.method}, uri: {request.uri}, {Tools.ToJson(request)}");
 
             using (var www = NetworkW3.Request(request))
             {
@@ -122,7 +122,7 @@ namespace WSC
 
                 try
                 {
-                    Log.Debug($"WWW request, uri: {request.uri}, {Tools.ToJson(request)}");
+                    Log.Debug($"WWW request, method: {request.method}, uri: {request.uri}, {Tools.ToJson(request)}");
 
                     var www = NetworkW3.Request(request);
                     var response = (HttpWebResponse)www.GetResponse();
