@@ -70,11 +70,21 @@ namespace WSC
                 finally
                 {
                     if (result.Exception != null)
+                    {
                         Log.Debug($"WWW response uri: {request.uri}, error: {result.Exception.HResult}, message: {result.Exception.Message}");
+
+                        if (request.recovery-- > 0)
+                        {
+                            Log.Debug("WWW retring...");
+                            Query(request, callback);
+                        }
+                    }
                     else
+                    {
                         Log.Debug($"WWW response uri: {request.uri}, contents: {result.Data}");
 
-                    callback?.Invoke(result);
+                        callback?.Invoke(result);
+                    }
                 }
             });
         }

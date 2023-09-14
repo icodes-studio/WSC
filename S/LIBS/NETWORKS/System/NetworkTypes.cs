@@ -2,7 +2,7 @@
 {
     public static class NetworkTypes
     {
-        public const int RECOVERY = 10;
+        public const int RecoveryCount = 10;
     }
 
     public enum NetworkError

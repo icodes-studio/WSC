@@ -6,7 +6,7 @@ namespace WSC
 {
     public class NetworkWS
     {
-        private int recoveryCount = NetworkTypes.RECOVERY;
+        private int recoveryCount = NetworkTypes.RecoveryCount;
         private IWebSocket socket = null;
         private Queue<Pending> pendings = new Queue<Pending>();
         private Queue<Message> messages = new Queue<Message>();
@@ -78,7 +78,7 @@ namespace WSC
                     }
                 });
 
-                recoveryCount = NetworkTypes.RECOVERY;
+                recoveryCount = NetworkTypes.RecoveryCount;
             }
         }
 
@@ -248,7 +248,7 @@ namespace WSC
                 else
                 {
                     Log.Debug($"Connecting... {socket?.Uri}");
-                    recoveryCount = NetworkTypes.RECOVERY;
+                    recoveryCount = NetworkTypes.RecoveryCount;
                 }
 
                 socket?.Connect();

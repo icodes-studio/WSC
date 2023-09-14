@@ -27,12 +27,20 @@ namespace WSC.DEMO
                 {
                     Log.Debug($"WWW response error, uri: {request.uri}, error: {www.responseCode}, message {www.error}");
 
-                    int error = (www.responseCode == 0) ? (int)NetworkError.Network : (int)www.responseCode;
-                    callback?.Invoke(new NetworkResponse()
+                    if (request.recovery-- > 0)
                     {
-                        Exception = new NetworkException(error, www.error),
-                        Sender = this
-                    });
+                        Log.Debug("WWW retring...");
+                        Query(request, callback);
+                    }
+                    else
+                    {
+                        int error = (www.responseCode == 0) ? (int)NetworkError.Network : (int)www.responseCode;
+                        callback?.Invoke(new NetworkResponse()
+                        {
+                            Exception = new NetworkException(error, www.error),
+                            Sender = this
+                        });
+                    }
                 }
                 else
                 {
