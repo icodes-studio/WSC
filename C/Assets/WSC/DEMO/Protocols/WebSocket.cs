@@ -35,7 +35,7 @@ namespace WSC.DEMO
 
         public void Send(string message, Action<bool> result)
         {
-            socket?.SendText(message).ContinueWith((task) => result?.Invoke(task.IsCompletedSuccessfully));
+            socket?.SendText(message).ContinueWith((task) => result?.Invoke(!task.IsFaulted));
         }
 
         public void Close()

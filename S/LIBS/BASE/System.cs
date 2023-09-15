@@ -12,7 +12,7 @@ namespace WSC
     public class System<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T instance = null;
-        private static object sync = new();
+        private static object sync = new object();
 
         public static T Instance
         {

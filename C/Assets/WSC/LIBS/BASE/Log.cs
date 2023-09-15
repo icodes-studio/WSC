@@ -22,7 +22,7 @@ namespace WSC
 
         private static string name = string.Empty;
         private static string location = string.Empty;
-        private static object fileLock = new();
+        private static object fileLock = new object();
         private static Action<LogLevel, string> callback = null;
         private static FileStream file = null;
         private static long index = 0;

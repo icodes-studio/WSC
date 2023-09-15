@@ -13,6 +13,6 @@ namespace AWS.CHAT
             public long timestamp;
         }
 
-        public List<Message> messages = new ();
+        public List<Message> messages = new List<Message>();
     }
 }

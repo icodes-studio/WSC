@@ -13,7 +13,7 @@ namespace AWS.CHAT
             public long timestamp;
         }
 
-        public List<UserInfo> users = new ();
+        public List<UserInfo> users = new List<UserInfo>();
 
         public override void OnQuery(Request request)
         {

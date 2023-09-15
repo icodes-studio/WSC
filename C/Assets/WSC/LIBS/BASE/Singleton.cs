@@ -5,7 +5,7 @@ namespace WSC
     public class Singleton<T> where T : class
     {
         private static T instance = null;
-        private static object sync = new();
+        private static object sync = new object();
 
         public static T Instance
         {

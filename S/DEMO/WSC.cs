@@ -8,12 +8,12 @@ namespace WSC.DEMO
     {
         protected override void OnOpen()
         {
-            Log.Debug($"{ID}({Context.QueryString["name"]})");
+            global::WSC.Log.Debug($"{ID}({Context.QueryString["name"]})");
         }
 
         protected override void OnClose(CloseEventArgs e)
         {
-            Log.Debug($"{ID}");
+            global::WSC.Log.Debug($"{ID}");
         }
 
         protected override void OnMessage(MessageEventArgs e)
@@ -40,7 +40,7 @@ namespace WSC.DEMO
                                 .MakeGenericMethod(handler)
                                 .Invoke(null, new object[] { e.Data }) as RequestWS;
 
-                            Log.Debug($"command: {request.command}, contents: {e.Data}");
+                            global::WSC.Log.Debug($"command: {request.command}, contents: {e.Data}");
 
                             answer = (AnswerWS)request.OnQuery(this);
                         }
@@ -66,7 +66,7 @@ namespace WSC.DEMO
                     answer.index = request.index;
 
                     var response = Tools.ToJson(answer);
-                    Log.Debug($"response: {response}");
+                    global::WSC.Log.Debug($"response: {response}");
                     Send(response);
                 }
             }

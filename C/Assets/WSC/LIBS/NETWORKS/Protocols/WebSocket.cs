@@ -15,10 +15,10 @@ namespace WSC
         public WebSocket(string uri)
         {
             socket = new WebSocketSharp.WebSocket(uri);
-            socket.OnOpen += (_, _) => OnOpen();
-            socket.OnMessage += (_, args) => OnMessage(args.Data);
-            socket.OnError += (_, args) => OnError(args.Message);
-            socket.OnClose += (_, args) => OnClose(args.Code);
+            socket.OnOpen += (s, e) => OnOpen();
+            socket.OnMessage += (s, e) => OnMessage(e?.Data);
+            socket.OnError += (s, e) => OnError(e?.Message);
+            socket.OnClose += (s, e) => OnClose(e?.Code ?? 0);
 
             if (socket.IsSecure == true)
                 socket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
