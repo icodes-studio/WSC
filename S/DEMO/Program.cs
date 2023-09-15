@@ -95,7 +95,7 @@ namespace WSC.DEMO
                     using (var reader = new StreamReader(args.Request.InputStream))
                         content = reader.ReadToEnd();
 
-                    Log.Debug($"command: {command}, contents: {content}");
+                    Log.Debug($"command: {command}, method: {args.Request.HttpMethod}, contents: {content}");
 
                     var request =
                         typeof(Tools)
