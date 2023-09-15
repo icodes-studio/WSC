@@ -1,10 +1,27 @@
 # WSC
 
 - **What is it**
-    - *WebSocket Server+Client library*
+    - *Unity WebSocket Client*
     - *https://github.com/icodes-studio/WSC*
 
-- **Demo**
-    - [Build Serverless Chat App with Amazon API Gateway](https://github.com/icodes-studio/WSC/blob/main/A/README.md)
-    - [Build C# custom server](https://github.com/icodes-studio/WSC/blob/main/S/README.md)
-    - [Unity WebSocket client](https://github.com/icodes-studio/WSC/blob/main/C/README.md)
+
+　
+
+## # Gettting started
+
+- **Developed & tested with**
+    - Unity 2022.3.4f1
+    - Unity 2021.3.29f1
+    - Unity 2020.3.39f1
+- **Dependencies**
+    - Newtonsoft.Json (3.2.1)
+        - *com.unity.nuget.newtonsoft-json*
+        - *https://www.newtonsoft.com/json*
+        - *https://github.com/JamesNK/Newtonsoft.Json*
+    - NativeWebSocket
+        - *https://github.com/endel/NativeWebSocket*
+        - *https://github.com/endel/NativeWebSocket.git#upm*
+    - WebSocketSharp-netstandard (1.0.1)
+        - *https://github.com/sta/websocket-sharp*
+        - *https://github.com/PingmanTools/websocket-sharp*
+        - *https://www.nuget.org/packages/WebSocketSharp-netstandard*
