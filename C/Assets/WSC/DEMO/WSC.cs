@@ -72,7 +72,7 @@ namespace WSC.DEMO
                 .Bind(new RequestWSCHello() { message = "Hello" }.Query<AnswerWSCHello>())
                 .Done += exception =>
                 {
-                    Log.Debug($"TEST#5 error: {exception?.ToString()}");
+                    Log.Debug($"TEST#5 error message: {exception?.ToString()}");
                 };
         }
     }

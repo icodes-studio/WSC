@@ -25,7 +25,7 @@ namespace WSC.DEMO
 
                 if (www.result != UnityWebRequest.Result.Success)
                 {
-                    Log.Debug($"WWW response error, uri: {request.uri}, error: {www.responseCode}, message {www.error}");
+                    Log.Debug($"WWW response error, uri: {request.uri}, error: {www.responseCode}, message: {www.error}");
 
                     if (request.recovery-- > 0)
                     {
