@@ -1,7 +1,8 @@
 # WSC
-*https://github.com/icodes-studio/WSC*
 
-*WebSocket Server+Client*
+- **What is it**
+    - *WebSocket Server+Client library*
+    - *https://github.com/icodes-studio/WSC*
 
 - **Demo**
     - [Build Serverless Chat App with Amazon API Gateway](https://github.com/icodes-studio/WSC/blob/main/A/README.md)
