@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-using static WSC.WebRequestTypes;
+using static WSC.WebRequest;
 
 namespace WSC.DEMO
 {
-    public sealed class WebRequest : IWeb
+    public sealed class WebRequest : IWebRequest
     {
         public void Query(RequestW3 request, Action<NetworkResponse> callback)
         {

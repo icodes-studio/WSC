@@ -27,9 +27,7 @@ namespace WSC.DEMO
                 }
             });
 
-            Network.Initialize(
-                new global::WSC.DEMO.WebRequest(),
-                new global::WSC.DEMO.WebSocketFactory());
+            Network.Initialize(new global::WSC.DEMO.WebProtocolFactory());
         }
 
         private void Start()

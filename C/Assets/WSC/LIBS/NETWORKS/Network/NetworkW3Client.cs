@@ -4,23 +4,22 @@ namespace WSC
 {
     public sealed class NetworkW3Client : System<NetworkW3Client>
     {
-        private IWeb www = new WSC.WebRequest();
+        private IWebRequest www = null;
 
-        public void Initialize(IWeb www = null)
+        public void Initialize()
         {
-            if (www != null)
-                this.www = www;
+            www = Network.Factory.CreateWebRequest();
         }
 
         public NetworkW3Client Query(RequestW3 request)
         {
-            www.Query(request, null);
+            www?.Query(request, null);
             return this;
         }
 
         public NetworkW3Client Query<T>(RequestW3 request, Action<T> callback) where T : Answer
         {
-            www.Query(request, (response) =>
+            www?.Query(request, (response) =>
             {
                 if (response.Exception == null)
                 {

@@ -11,10 +11,13 @@ namespace WSC
 #if !UNITY
         private static Timer timer;
 #endif
-        public static void Initialize(IWeb www = null, IWebSocketFactory factory = null)
+        public static void Initialize(IWebProtocolFactory factory = null)
         {
-            NetworkW3Client.i.Initialize(www);
-            NetworkWSClient.i.Initialize(factory);
+            if (factory != null)
+                Factory = factory;
+
+            NetworkW3Client.i.Initialize();
+            NetworkWSClient.i.Initialize();
 #if UNITY
             UnityEngine.Application.runInBackground = true;
 #else
@@ -22,6 +25,12 @@ namespace WSC
 #endif
             RuntimeInitializeAttribute.Initialize();
         }
+
+        public static IWebProtocolFactory Factory
+        {
+            get;
+            private set;
+        } = new WebProtocolFactory();
 
         public static void Release()
         {

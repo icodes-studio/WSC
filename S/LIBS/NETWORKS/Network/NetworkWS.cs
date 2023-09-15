@@ -6,8 +6,8 @@ namespace WSC
 {
     public class NetworkWS
     {
-        private int recoveryCount = NetworkTypes.RecoveryCount;
         private IWebSocket socket = null;
+        private int recoveryCount = NetworkTypes.RecoveryCount;
         private Queue<Pending> pendings = new Queue<Pending>();
         private Queue<Message> messages = new Queue<Message>();
         private Dictionary<string, Action<NetworkResponse>> callbacks = new Dictionary<string, Action<NetworkResponse>>();
@@ -46,9 +46,9 @@ namespace WSC
             Error
         }
 
-        public NetworkWS(string host, IWebSocketFactory factory)
+        public NetworkWS(string host)
         {
-            socket = factory.Create(host);
+            socket = Network.Factory.CreateWebSocket(host);
             socket.OnOpen += OnSocketOpen;
             socket.OnMessage += OnSocketMessage;
             socket.OnError += OnSocketError;
@@ -177,7 +177,7 @@ namespace WSC
 
                 State = STATE.Closed;
 
-                if (code == (ushort)CloseStatusCode.Normal)
+                if (code == (ushort)WebSocket.CloseStatusCode.Normal)
                 {
                     // When explicitly closed
                 }

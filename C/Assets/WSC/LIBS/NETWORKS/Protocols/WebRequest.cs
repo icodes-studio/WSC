@@ -7,12 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using static WSC.WebRequestTypes;
-
 namespace WSC
 {
-    public sealed class WebRequest : IWeb
+    public sealed class WebRequest : IWebRequest
     {
+        public const string GET = "GET";
+        public const string PUT = "PUT";
+        public const string POST = "POST";
+        public const string DELETE = "DELETE";
+
         public void Query(RequestW3 request, Action<NetworkResponse> callback)
         {
             Task.Run(() =>

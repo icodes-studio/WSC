@@ -10,7 +10,7 @@ namespace AWS.CHAT
 
         public RequestChatMessage()
         {
-            method = WebRequestTypes.PUT;
+            method = WebRequest.PUT;
             userId = ChatInfo.UID;
             name = ChatInfo.NAME;
         }
