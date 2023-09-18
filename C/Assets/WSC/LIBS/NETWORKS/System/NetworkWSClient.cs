@@ -93,6 +93,7 @@ namespace WSC
                 if (notify != null)
                 {
                     Log.Debug($"WEBSOCKET notify: {response.Data}");
+                    notify.host = (response.Sender as NetworkWS)?.Uri.ToString() ?? string.Empty;
                     notify.OnQuery(null);
                 }
             }
@@ -128,6 +129,12 @@ namespace WSC
         internal NetworkWSClient RegisterNotify(Type type, string command)
         {
             Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type, command);
+            return this;
+        }
+
+        internal NetworkWSClient RegisterNotify(Type type, string host, string command)
+        {
+            Socket(host).RegisterNotify(type, command);
             return this;
         }
 

@@ -11,5 +11,10 @@
         {
             NetworkWSClient.i.RegisterNotify(typeof(T), command);
         }
+
+        protected static void Register(string host, string command)
+        {
+            NetworkWSClient.i.RegisterNotify(typeof(T), host, command);
+        }
     }
 }

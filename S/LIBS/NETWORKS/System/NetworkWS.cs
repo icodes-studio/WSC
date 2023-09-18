@@ -388,5 +388,7 @@ namespace WSC
         {
             notifications.Remove(command);
         }
+
+        internal Uri Uri => socket?.Uri;
     }
 }
