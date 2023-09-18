@@ -46,7 +46,7 @@ namespace WSC.UNITY
         public void Dispatch()
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
-            socket.DispatchMessageQueue();
+            socket?.DispatchMessageQueue();
 #endif
         }
     }
