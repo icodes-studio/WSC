@@ -4,7 +4,7 @@ namespace WSC
     {
         public int error;
 
-        public virtual void OnQuery(Request request)
+        internal virtual void OnQuery(Request request)
         {
         }
     }

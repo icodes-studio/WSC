@@ -19,7 +19,7 @@ namespace DEMO
             Register();
         }
 
-        public override Answer OnQuery(object sender)
+        internal override Answer OnQuery(object sender)
         {
             Log.Debug($"{nameof(udid)}:{udid}, {nameof(device)}:{device}");
 

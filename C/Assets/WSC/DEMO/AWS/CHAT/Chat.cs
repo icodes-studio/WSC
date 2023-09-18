@@ -28,9 +28,9 @@ namespace DEMO.AWS.CHAT
                 }
             });
 
-            WSC.Network.Initialize();
+            //WSC.Network.Initialize();
             //WSC.Network.Initialize(new WSC.WebProtocolFactory());
-            //WSC.Network.Initialize(new WSC.UNITY.WebProtocolFactory());
+            WSC.Network.Initialize(new WSC.UNITY.WebProtocolFactory());
         }
 
         private void Start()

@@ -10,18 +10,18 @@ namespace WSC
         public event Action<NetworkResponse> OnClose = delegate { };
         public event Action<NetworkResponse> OnOpen = delegate { };
 
-        public void Initialize()
+        internal void Initialize()
         {
             // N/A
         }
 
-        public NetworkWSClient Query(RequestWS payload)
+        internal NetworkWSClient Query(RequestWS payload)
         {
             OnQuery(payload, null);
             return this;
         }
 
-        public NetworkWSClient Query<T>(RequestWS request, Action<T> callback) where T : Answer
+        internal NetworkWSClient Query<T>(RequestWS request, Action<T> callback) where T : Answer
         {
             OnQuery(request, (response) =>
             {
@@ -112,32 +112,32 @@ namespace WSC
             return socket;
         }
 
-        public void Update()
+        internal void Update()
         {
             var backup = new Dictionary<string, NetworkWS>(sockets);
             foreach (var socket in backup.Values)
                 socket.Dispatch();
         }
 
-        public NetworkWSClient RegisterNotify(Type type)
+        internal NetworkWSClient RegisterNotify(Type type)
         {
             Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type);
             return this;
         }
 
-        public NetworkWSClient RegisterNotify(Type type, string command)
+        internal NetworkWSClient RegisterNotify(Type type, string command)
         {
             Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type, command);
             return this;
         }
 
-        public NetworkWSClient Connect(string host)
+        internal NetworkWSClient Connect(string host)
         {
             Socket(host).Connect();
             return this;
         }
 
-        public NetworkWSClient Close(string host)
+        internal NetworkWSClient Close(string host)
         {
             if (sockets.TryGetValue(host, out var socket))
                 socket.Close();
@@ -145,7 +145,7 @@ namespace WSC
             return this;
         }
 
-        public NetworkWSClient CloseAll()
+        internal NetworkWSClient CloseAll()
         {
             var backup = new Dictionary<string, NetworkWS>(sockets);
             foreach (var socket in backup.Values)

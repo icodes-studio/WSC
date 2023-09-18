@@ -9,12 +9,12 @@ namespace WSC
         {
         }
 
-        public virtual Request Query<T>(Action<T> callback = null) where T : Answer
+        internal virtual Request Query<T>(Action<T> callback = null) where T : Answer
         {
             return this;
         }
 
-        public virtual Answer OnQuery(object sender)
+        internal virtual Answer OnQuery(object sender)
         {
             return null;
         }

@@ -19,7 +19,7 @@ namespace WSC
             NetworkWSClient.i.Query(this);
         }
 
-        public override Request Query<T>(Action<T> callback = null)
+        internal override Request Query<T>(Action<T> callback = null)
         {
             if (callback != null)
                 Done += new Action<Answer>(answer => callback((T)answer));

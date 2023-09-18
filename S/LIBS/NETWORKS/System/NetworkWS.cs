@@ -255,12 +255,12 @@ namespace WSC
             }
         }
 
-        public void Connect()
+        internal void Connect()
         {
             Connect(false);
         }
 
-        public void Close()
+        internal void Close()
         {
             pendings?.Clear();
             callbacks?.Clear();
@@ -270,12 +270,12 @@ namespace WSC
             State = STATE.Closed;
         }
 
-        public void Send(string payload)
+        internal void Send(string payload)
         {
             Send(payload, string.Empty, true, null);
         }
 
-        public void Send(string payload, string index, bool recovery, Action<NetworkResponse> callback)
+        internal void Send(string payload, string index, bool recovery, Action<NetworkResponse> callback)
         {
             if (State == STATE.Connected)
             {
@@ -332,7 +332,7 @@ namespace WSC
             }
         }
 
-        public void Dispatch()
+        internal void Dispatch()
         {
             socket?.Dispatch();
 
@@ -355,7 +355,7 @@ namespace WSC
             }
         }
 
-        public void RegisterNotify(Type type)
+        internal void RegisterNotify(Type type)
         {
             try
             {
@@ -367,7 +367,7 @@ namespace WSC
             }
         }
 
-        public void RegisterNotify(Type type, string command)
+        internal void RegisterNotify(Type type, string command)
         {
             try
             {
@@ -379,12 +379,12 @@ namespace WSC
             }
         }
 
-        public void UnregisterNotify(Type type)
+        internal void UnregisterNotify(Type type)
         {
             notifications.Remove((Activator.CreateInstance(type) as Notify).command);
         }
 
-        public void UnregisterNotify(string command)
+        internal void UnregisterNotify(string command)
         {
             notifications.Remove(command);
         }

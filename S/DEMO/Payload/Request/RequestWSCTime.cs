@@ -10,7 +10,7 @@ namespace DEMO
             Register();
         }
 
-        public override Answer OnQuery(object sender)
+        internal override Answer OnQuery(object sender)
         {
             return new AnswerWSCTime()
             {

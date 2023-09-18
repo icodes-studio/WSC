@@ -14,18 +14,18 @@ namespace WSC
             public Answer answer;
         }
 
-        public void Initialize()
+        internal void Initialize()
         {
             www = Network.Factory.CreateWebRequest();
         }
 
-        public NetworkW3Client Query(RequestW3 request)
+        internal NetworkW3Client Query(RequestW3 request)
         {
             www?.Query(request, null);
             return this;
         }
 
-        public NetworkW3Client Query<T>(RequestW3 request, Action<T> callback) where T : Answer
+        internal NetworkW3Client Query<T>(RequestW3 request, Action<T> callback) where T : Answer
         {
             www?.Query(request, (response) =>
             {

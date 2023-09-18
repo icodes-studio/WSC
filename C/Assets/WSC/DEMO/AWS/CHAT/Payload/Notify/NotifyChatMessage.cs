@@ -17,7 +17,7 @@ namespace DEMO.AWS.CHAT
             Register();
         }
 
-        public override void OnQuery(Request request)
+        internal override void OnQuery(Request request)
         {
             base.OnQuery(request);
 

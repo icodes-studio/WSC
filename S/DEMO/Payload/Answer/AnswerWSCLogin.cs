@@ -7,7 +7,7 @@ namespace DEMO
         public string token;
         public double timestamp;
 
-        public override void OnQuery(Request request)
+        internal override void OnQuery(Request request)
         {
             base.OnQuery(request);
 

@@ -30,7 +30,7 @@ namespace WSC
             RuntimeInitializeAttribute.Initialize();
         }
 
-        public static IWebProtocolFactory Factory
+        internal static IWebProtocolFactory Factory
         {
             get;
             private set;
