@@ -14,10 +14,10 @@ namespace WSC
         private Dictionary<string, Type> notifications = new Dictionary<string, Type>();
         private object sync = new object();
 
-        public event Action<NetworkResponse> OnNotify = delegate { };
-        public event Action<NetworkResponse> OnMessage = delegate { };
-        public event Action<NetworkResponse> OnClose = delegate { };
-        public event Action<NetworkResponse> OnOpen = delegate { };
+        internal event Action<NetworkResponse> OnNotify = delegate { };
+        internal event Action<NetworkResponse> OnMessage = delegate { };
+        internal event Action<NetworkResponse> OnClose = delegate { };
+        internal event Action<NetworkResponse> OnOpen = delegate { };
 
         private class Pending
         {
@@ -32,13 +32,13 @@ namespace WSC
             public Action<NetworkResponse> callback;
         }
 
-        public STATE State
+        internal STATE State
         {
             get;
             private set;
         }
 
-        public enum STATE
+        internal enum STATE
         {
             Closed = 0,
             Connecting,
@@ -46,7 +46,7 @@ namespace WSC
             Error
         }
 
-        public NetworkWS(string host)
+        internal NetworkWS(string host)
         {
             socket = Network.Factory.CreateWebSocket(host);
             socket.OnOpen += OnSocketOpen;
