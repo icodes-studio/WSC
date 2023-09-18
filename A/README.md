@@ -313,7 +313,7 @@
 - ***유니티 Frontend 준비하기***
     - *유니티 프로젝트:* *https://github.com/icodes-studio/WSC/tree/main/C*
     - ***API Gateway ID 소스 업데이트***
-        - *업데이트할 소스:* *https://github.com/icodes-studio/WSC/blob/main/C/Assets/AWS/CHAT/ChatInfo.cs*
+        - *업데이트할 소스:* *https://github.com/icodes-studio/WSC/blob/main/C/Assets/WSC/DEMO/AWS/CHAT/ChatInfo.cs*
         - *RestID:* ***chatapp-rest*** *API ID 입력*
         - *SocketID:* ***chatapp-websocket*** *API ID 입력*
         ```csharp
@@ -341,7 +341,7 @@
 　
 
 - ***Code Review***
-    - *https://github.com/icodes-studio/WSC/blob/main/C/Assets/AWS/CHAT/Chat.cs*
+    - *https://github.com/icodes-studio/WSC/blob/main/C/Assets/WSC/DEMO/AWS/CHAT/Chat.cs*
         ```csharp
         using UnityEngine;
         using WSC;
