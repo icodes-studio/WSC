@@ -1,10 +1,8 @@
-﻿using System;
 using System.Collections.Generic;
-using WSC;
 
-namespace DEMO
+namespace WSC.UNITY.DEMO
 {
-    public class RequestWSC<T> :
+    public class RequestWSC :
 #if W3C
         RequestW3
 #else
@@ -29,15 +27,6 @@ namespace DEMO
             };
 #else
             host = WSCInfo.WSHost;
-#endif
-        }
-
-        protected static void Register()
-        {
-#if W3C
-            Program.i.RegisterHandler((Activator.CreateInstance(typeof(T)) as RequestW3).command, typeof(T));
-#else
-            Program.i.RegisterHandler((Activator.CreateInstance(typeof(T)) as RequestWS).command, typeof(T));
 #endif
         }
     }

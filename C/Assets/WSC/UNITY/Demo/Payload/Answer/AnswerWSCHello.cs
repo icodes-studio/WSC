@@ -1,4 +1,4 @@
-﻿namespace DEMO
+﻿namespace WSC.UNITY.DEMO
 {
     public class AnswerWSCHello : AnswerWSC
     {

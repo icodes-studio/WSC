@@ -5,8 +5,9 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using WebSocketSharp.Server;
+using WSC;
 
-namespace WSC.DEMO
+namespace DEMO
 {
     class Program : Singleton<Program>
     {

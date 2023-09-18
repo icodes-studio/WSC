@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace DEMO
+namespace WSC.UNITY.DEMO
 {
     public static class WSCInfo
     {
@@ -13,14 +13,14 @@ namespace DEMO
         }
 
         public static string AccessToken { get; set; } = string.Empty;
-        public static string Platform => Environment.OSVersion.Platform.ToString(); 
+        public static string Platform => Environment.OSVersion.Platform.ToString();
         public static string DeviceModel => Environment.OSVersion.ToString();
         public static string DeviceID => Environment.OSVersion.VersionString;
         public static string DeviceName => Environment.MachineName;
         public static string Locale => Thread.CurrentThread.CurrentCulture.Name;
         public static string Version => Environment.Version.ToString();
         public static string Host => "localhost:4649/WSC/";
-        public static string WSHost => $"ws://{WSCInfo.Host}?name={WSCInfo.DeviceName}";
-        public static string W3Host => $"http://{WSCInfo.Host}";
+        public static string WSHost => $"ws://{Host}?name={DeviceName}";
+        public static string W3Host => $"http://{Host}";
     }
 }

@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
 namespace WSC
 {
     public sealed class NetworkW3Client : System<NetworkW3Client>
     {
         private IWebRequest www = null;
+        private ConcurrentQueue<Response> responses = new ConcurrentQueue<Response>();
+
+        private class Response
+        {
+            public Delegate callback;
+            public Answer answer;
+        }
 
         public void Initialize()
         {
@@ -43,7 +51,12 @@ namespace WSC
                                 answer = Activator.CreateInstance<T>();
                                 answer.error = (int)NetworkError.Unknown;
                             }
-                            callback(answer);
+
+                            responses.Enqueue(new Response()
+                            {
+                                callback = callback,
+                                answer = answer
+                            });
                         }
                     }
                 }
@@ -53,12 +66,23 @@ namespace WSC
                     {
                         T answer = Activator.CreateInstance<T>();
                         answer.error = response.Exception.HResult;
-                        callback(answer);
+
+                        responses.Enqueue(new Response()
+                        {
+                            callback = callback,
+                            answer = answer
+                        });
                     }
                 }
             });
 
             return this;
+        }
+
+        public void Update()
+        {
+            while (responses.TryDequeue(out var response))
+                response.callback?.DynamicInvoke(response?.answer);
         }
     }
 }

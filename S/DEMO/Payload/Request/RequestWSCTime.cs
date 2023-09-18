@@ -1,4 +1,6 @@
-﻿namespace WSC.DEMO
+﻿using WSC;
+
+namespace DEMO
 {
     public class RequestWSCTime : RequestWSC<RequestWSCTime>
     {

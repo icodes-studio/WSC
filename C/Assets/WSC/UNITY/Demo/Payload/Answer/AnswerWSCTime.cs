@@ -1,10 +1,7 @@
-﻿using WSC;
-
-namespace DEMO
+﻿namespace WSC.UNITY.DEMO
 {
-    public class AnswerWSCLogin : AnswerWSC
+    public class AnswerWSCTime : AnswerWSC
     {
-        public string token;
         public double timestamp;
 
         public override void OnQuery(Request request)
@@ -17,7 +14,6 @@ namespace DEMO
                 return;
             }
 
-            WSCInfo.AccessToken = token;
             WSCInfo.Time = Tools.UnixTime(timestamp);
         }
     }

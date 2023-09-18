@@ -1,4 +1,6 @@
-﻿namespace WSC.DEMO
+﻿using WSC;
+
+namespace DEMO
 {
     record AppConfig(
         string Environment,

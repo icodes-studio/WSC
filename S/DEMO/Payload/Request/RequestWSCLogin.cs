@@ -1,4 +1,6 @@
-﻿namespace WSC.DEMO
+﻿using WSC;
+
+namespace DEMO
 {
     public class RequestWSCLogin : RequestWSC<RequestWSCLogin>
     {
