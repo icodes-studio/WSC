@@ -3,6 +3,7 @@ using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace WSC
 {
@@ -12,7 +13,16 @@ namespace WSC
 
         static Tools()
         {
-            JSON = new JsonSerializer();
+            JSON = JsonSerializer.CreateDefault(new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new SnakeCaseNamingStrategy
+                    {
+                        ProcessDictionaryKeys = true
+                    }
+                },
+            });
             JSON.Converters.Add(new JavaScriptDateTimeConverter());
             JSON.NullValueHandling = NullValueHandling.Ignore;
         }

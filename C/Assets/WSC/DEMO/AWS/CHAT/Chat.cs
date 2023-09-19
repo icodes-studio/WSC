@@ -51,7 +51,7 @@ namespace DEMO.AWS.CHAT
 
             NotifyChatMessage.OnNotify += (notify) =>
             {
-                Log.Debug($"[Message] roomId:{notify.roomId}, userId:{notify.userId}, name:{notify.name}, message:{notify.message}, timestamp:{notify.timestamp}");
+                Log.Debug($"[Message] from:{notify.host}, roomId:{notify.roomId}, userId:{notify.userId}, name:{notify.name}, message:{notify.message}, timestamp:{notify.timestamp}");
             };
 
             NetworkWSClient.i.OnClose += (response) =>

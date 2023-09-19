@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/WSC/UNITY/Demo/Scenes/Demo.unity
+    path: Assets/WSC/UNITY/Demo/WSC.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/WSC/DEMO/AWS/CHAT/Scenes/Chat.unity
+    path: Assets/WSC/DEMO/AWS/CHAT/Chat.unity
     guid: c58d08fe6b1fe2a43a0527a1cc0f04ba
   m_configObjects: {}
