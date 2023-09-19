@@ -20,7 +20,7 @@ namespace WSC.UNITY
             if (!string.IsNullOrEmpty(Uri.Query))
             {
                 header = new Dictionary<string, string>();
-                header["Cookie"] = Uri.Query.TrimStart('?');
+                header["Cookie"] = Uri.Query.TrimStart('?').Replace("&", ";");
             }
 
             socket = new NativeWebSocket.WebSocket(uri, header);
