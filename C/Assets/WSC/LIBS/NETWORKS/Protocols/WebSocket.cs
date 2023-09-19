@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Web;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
+using WebSocketSharp.Net;
 
 namespace WSC
 {
@@ -20,14 +23,19 @@ namespace WSC
             socket.OnError += (s, e) => OnError(e?.Message);
             socket.OnClose += (s, e) => OnClose(e?.Code ?? 0);
 
+            if (!string.IsNullOrEmpty(Uri.Query))
+            {
+                NameValueCollection cookies = HttpUtility.ParseQueryString(Uri.Query);
+                foreach (var key in cookies.AllKeys)
+                    socket.SetCookie(new Cookie(key, cookies[key]));
+            }
+
             if (socket.IsSecure == true)
                 socket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
 #if DEBUG
             socket.Log.Level = WebSocketSharp.LogLevel.Trace;
 #endif
         }
-
-        public Uri Uri => socket?.Url;
 
         public void Connect()
         {
@@ -56,6 +64,8 @@ namespace WSC
         {
             // N/A
         }
+
+        public Uri Uri => socket?.Url;
 
         public enum CloseStatusCode : ushort
         {

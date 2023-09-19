@@ -10,6 +10,10 @@ namespace DEMO
         protected override void OnOpen()
         {
             global::WSC.Log.Debug($"{ID}({Context?.QueryString["name"]})");
+
+            var cookies = Context?.CookieCollection;
+            foreach (var cookie in cookies)
+                global::WSC.Log.Debug($"Cookie: {cookie}");
         }
 
         protected override void OnClose(CloseEventArgs e)

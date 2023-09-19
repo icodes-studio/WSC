@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace WSC.UNITY
@@ -15,7 +16,14 @@ namespace WSC.UNITY
         public WebSocket(string uri)
         {
             Uri = new Uri(uri);
-            socket = new NativeWebSocket.WebSocket(uri);
+            Dictionary<string, string> header = null;
+            if (!string.IsNullOrEmpty(Uri.Query))
+            {
+                header = new Dictionary<string, string>();
+                header["Cookie"] = Uri.Query.TrimStart('?');
+            }
+
+            socket = new NativeWebSocket.WebSocket(uri, header);
             socket.OnOpen += () => OnOpen();
             socket.OnMessage += (message) => OnMessage(Encoding.UTF8.GetString(message));
             socket.OnError += (message) => OnError(message);
