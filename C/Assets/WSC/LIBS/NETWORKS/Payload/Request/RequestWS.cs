@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace WSC
@@ -49,6 +50,7 @@ namespace WSC
             return this;
         }
 
+        [JsonIgnore] internal Dictionary<string, string> cookies = null;
         [JsonIgnore] internal bool recovery = true;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace DEMO
@@ -22,5 +23,18 @@ namespace DEMO
         public static string Host => "localhost:4649/WSC/";
         public static string WSHost => $"ws://{WSCInfo.Host}?name={WSCInfo.DeviceName}";
         public static string W3Host => $"http://{WSCInfo.Host}";
+
+        public static Dictionary<string, string> WSCookies =>
+            new Dictionary<string, string>
+            {
+                { "Authorization", AccessToken },
+                { "Device", DeviceModel }
+            };
+
+        public static Dictionary<string, string> W3Headers =>
+            new Dictionary<string, string>
+            {
+                { "Authorization", string.Format("Bearer {0}", AccessToken) }
+            };
     }
 }

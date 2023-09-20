@@ -46,9 +46,9 @@ namespace WSC
             Error
         }
 
-        internal NetworkWS(string host)
+        internal NetworkWS(string host, Dictionary<string, string> cookies)
         {
-            socket = Network.Factory.CreateWebSocket(host);
+            socket = Network.Factory.CreateWebSocket(host, cookies);
             socket.OnOpen += OnSocketOpen;
             socket.OnMessage += OnSocketMessage;
             socket.OnError += OnSocketError;

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Web;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebSocketSharp.Net;
 
@@ -15,7 +14,7 @@ namespace WSC
         public event Action<string> OnMessage = delegate { };
         public event Action OnOpen = delegate { };
 
-        public WebSocket(string uri)
+        public WebSocket(string uri, Dictionary<string, string> cookies)
         {
             socket = new WebSocketSharp.WebSocket(uri);
             socket.OnOpen += (s, e) => OnOpen();
@@ -23,11 +22,10 @@ namespace WSC
             socket.OnError += (s, e) => OnError(e?.Message);
             socket.OnClose += (s, e) => OnClose(e?.Code ?? 0);
 
-            if (!string.IsNullOrEmpty(Uri.Query))
+            if (cookies != null)
             {
-                NameValueCollection cookies = HttpUtility.ParseQueryString(Uri.Query);
-                foreach (var key in cookies.AllKeys)
-                    socket.SetCookie(new Cookie(key, cookies[key]));
+                foreach (var cookie in cookies)
+                    socket.SetCookie(new Cookie(cookie.Key, cookie.Value));
             }
 
             if (socket.IsSecure == true)

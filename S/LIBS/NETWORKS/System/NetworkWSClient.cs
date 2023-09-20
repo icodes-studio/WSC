@@ -69,7 +69,7 @@ namespace WSC
         {
             Log.Debug($"WEBSOCKET request:{Tools.ToJson(request)}");
 
-            Socket(request.host).Send(
+            Socket(request.host, request.cookies).Send(
                 Tools.ToJson(request),
                 request.index,
                 request.recovery,
@@ -99,11 +99,11 @@ namespace WSC
             }
         }
 
-        private NetworkWS Socket(string host)
+        private NetworkWS Socket(string host, Dictionary<string, string> cookies)
         {
             if (sockets.TryGetValue(host, out var socket) == false)
             {
-                socket = new NetworkWS(host);
+                socket = new NetworkWS(host, cookies);
                 socket.OnNotify += OnNotify;
                 socket.OnOpen += (response) => OnOpen(response);
                 socket.OnClose += (response) => OnClose(response);
@@ -122,25 +122,34 @@ namespace WSC
 
         internal NetworkWSClient RegisterNotify(Type type)
         {
-            Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type);
+            var notify = Activator.CreateInstance(type) as Notify;
+            Socket(notify.host, notify.cookies).RegisterNotify(type);
             return this;
         }
 
         internal NetworkWSClient RegisterNotify(Type type, string command)
         {
-            Socket((Activator.CreateInstance(type) as Notify).host).RegisterNotify(type, command);
+            var notify = Activator.CreateInstance(type) as Notify;
+            Socket(notify.host, notify.cookies).RegisterNotify(type, command);
             return this;
         }
 
         internal NetworkWSClient RegisterNotify(Type type, string host, string command)
         {
-            Socket(host).RegisterNotify(type, command);
+            var notify = Activator.CreateInstance(type) as Notify;
+            Socket(host, notify.cookies).RegisterNotify(type, command);
             return this;
         }
 
-        internal NetworkWSClient Connect(string host)
+        internal NetworkWSClient RegisterNotify(Type type, string host, Dictionary<string, string> cookies, string command)
         {
-            Socket(host).Connect();
+            Socket(host, cookies).RegisterNotify(type, command);
+            return this;
+        }
+
+        internal NetworkWSClient Connect(string host, Dictionary<string, string> cookies = null)
+        {
+            Socket(host, cookies).Connect();
             return this;
         }
 

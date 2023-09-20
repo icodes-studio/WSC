@@ -6,8 +6,8 @@ namespace DEMO.AWS.CHAT
 {
     public static class ChatInfo
     {
-        const string RestID = "RestID";
-        const string SocketID = "SocketID";
+        const string RestID = "9o107n8j82";
+        const string SocketID = "e1hp1224fj";
 
         public static string NAME => Environment.MachineName;
         public static string UID => Process.GetCurrentProcess().Id.ToString();

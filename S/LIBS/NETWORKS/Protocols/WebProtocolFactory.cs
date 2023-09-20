@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WSC
 {
@@ -25,7 +26,7 @@ namespace WSC
     public interface IWebProtocolFactory
     {
         IWebRequest CreateWebRequest();
-        IWebSocket CreateWebSocket(string uri);
+        IWebSocket CreateWebSocket(string uri, Dictionary<string, string> cookies);
     }
 
     public sealed class WebProtocolFactory : IWebProtocolFactory
@@ -33,7 +34,7 @@ namespace WSC
         public IWebRequest CreateWebRequest() =>
             new WSC.WebRequest();
 
-        public IWebSocket CreateWebSocket(string uri) =>
-            new WSC.WebSocket(uri);
+        public IWebSocket CreateWebSocket(string uri, Dictionary<string, string> cookies) =>
+            new WSC.WebSocket(uri, cookies);
     }
 }

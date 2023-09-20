@@ -6,6 +6,7 @@ namespace WSC.UNITY.DEMO
         {
             command = GetType().Name;
             host = WSCInfo.WSHost;
+            cookies = WSCInfo.WSCookies;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace WSC.UNITY.DEMO
                 }
             });
 
+            //Network.Initialize();
             Network.Initialize(new global::WSC.UNITY.WebProtocolFactory());
         }
 

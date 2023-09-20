@@ -21,12 +21,10 @@ namespace WSC.UNITY.DEMO
             locale = WSCInfo.Locale;
 #if W3C
             host = WSCInfo.W3Host;
-            headers = new Dictionary<string, string>
-            {
-                {"Authorization", string.Format("Bearer {0}", WSCInfo.AccessToken)}
-            };
+            headers = WSCInfo.W3Headers;
 #else
             host = WSCInfo.WSHost;
+            cookies = WSCInfo.WSCookies;
 #endif
         }
     }

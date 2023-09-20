@@ -13,16 +13,20 @@ namespace WSC.UNITY
         public event Action<string> OnMessage = delegate { };
         public event Action OnOpen = delegate { };
 
-        public WebSocket(string uri)
+        public WebSocket(string uri, Dictionary<string, string> cookies)
         {
-            Uri = new Uri(uri);
             Dictionary<string, string> header = null;
-            if (!string.IsNullOrEmpty(Uri.Query))
+            if (cookies != null)
             {
+                string parameters = string.Empty;
+                foreach (var cookie in cookies)
+                    parameters += $"{cookie.Key}={cookie.Value};";
+
                 header = new Dictionary<string, string>();
-                header["Cookie"] = Uri.Query.TrimStart('?').Replace("&", ";");
+                header["Cookie"] = parameters.Trim(';');
             }
 
+            Uri = new Uri(uri);
             socket = new NativeWebSocket.WebSocket(uri, header);
             socket.OnOpen += () => OnOpen();
             socket.OnMessage += (message) => OnMessage(Encoding.UTF8.GetString(message));
