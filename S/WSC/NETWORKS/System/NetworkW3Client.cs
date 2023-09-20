@@ -14,7 +14,7 @@ namespace WSC
             public Answer answer;
         }
 
-        internal void Initialize(IWebProtocolFactory factory = null)
+        public void Initialize(IWebProtocolFactory factory = null)
         {
             if (factory != null)
                 www = factory.CreateWebRequest();

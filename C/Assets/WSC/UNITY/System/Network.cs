@@ -19,5 +19,13 @@ namespace WSC.UNITY
             NetworkWSClient.i.Update();
             NetworkW3Client.i.Update();
         }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            NetworkW3Client.Destroy();
+            NetworkWSClient.Destroy();
+        }
     }
 }

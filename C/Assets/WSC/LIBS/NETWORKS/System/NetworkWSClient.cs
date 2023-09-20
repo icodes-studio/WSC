@@ -11,7 +11,7 @@ namespace WSC
         public event Action<NetworkResponse> OnClose = delegate { };
         public event Action<NetworkResponse> OnOpen = delegate { };
 
-        internal void Initialize(IWebProtocolFactory factory = null)
+        public void Initialize(IWebProtocolFactory factory = null)
         {
             if (factory != null)
                 this.factory = factory;
@@ -115,7 +115,7 @@ namespace WSC
             return socket;
         }
 
-        internal void Update()
+        public void Update()
         {
             var backup = new Dictionary<string, NetworkWS>(sockets);
             foreach (var socket in backup.Values)

@@ -17,5 +17,13 @@
             NetworkW3Client.i.Update();
             NetworkWSClient.i.Update();
         }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            NetworkW3Client.Destroy();
+            NetworkWSClient.Destroy();
+        }
     }
 }
