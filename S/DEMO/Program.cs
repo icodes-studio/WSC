@@ -5,9 +5,8 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using WebSocketSharp.Server;
-using WSC;
 
-namespace DEMO
+namespace WSC.DEMO
 {
     class Program : Singleton<Program>
     {
@@ -25,7 +24,7 @@ namespace DEMO
             config = Tools.FromJson<AppConfig>(File.ReadAllText(Tools.FullPath("S.Config.json")));
             Log.Initialize(config.LogPath, nameof(WSC), config.LogLevel, (_, message) => Trace.WriteLine(message));
 
-            Network.Initialize();
+            Network.i.Initialize();
         }
 
         public bool Start()

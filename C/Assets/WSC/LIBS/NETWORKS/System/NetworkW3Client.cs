@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 
 namespace WSC
 {
-    public sealed class NetworkW3Client : System<NetworkW3Client>
+    public sealed class NetworkW3Client : Singleton<NetworkW3Client>
     {
-        private IWebRequest www = null;
+        private IWebRequest www = new WebRequest();
         private ConcurrentQueue<Response> responses = new ConcurrentQueue<Response>();
 
         private class Response
@@ -14,9 +14,10 @@ namespace WSC
             public Answer answer;
         }
 
-        internal void Initialize()
+        internal void Initialize(IWebProtocolFactory factory = null)
         {
-            www = Network.Factory.CreateWebRequest();
+            if (factory != null)
+                www = factory.CreateWebRequest();
         }
 
         internal NetworkW3Client Query(RequestW3 request)

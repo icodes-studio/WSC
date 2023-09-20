@@ -1,4 +1,4 @@
-﻿namespace DEMO
+﻿namespace WSC.DEMO
 {
     public class AnswerWSCHello : AnswerWSC
     {

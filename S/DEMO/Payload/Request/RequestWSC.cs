@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WSC;
 
-namespace DEMO
+namespace WSC.DEMO
 {
     public class RequestWSC<T> :
 #if W3C

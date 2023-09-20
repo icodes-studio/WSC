@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace DEMO
+namespace WSC.DEMO
 {
     public static class WSCInfo
     {

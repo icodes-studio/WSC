@@ -1,6 +1,4 @@
-﻿using WSC;
-
-namespace DEMO
+﻿namespace WSC.DEMO
 {
     public class AnswerWSCLogin : AnswerWSC
     {

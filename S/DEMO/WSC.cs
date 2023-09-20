@@ -1,9 +1,8 @@
 ﻿using System;
 using WebSocketSharp;
 using WebSocketSharp.Server;
-using WSC;
 
-namespace DEMO
+namespace WSC.DEMO
 {
     class WSC : WebSocketBehavior
     {

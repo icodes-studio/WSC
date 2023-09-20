@@ -27,8 +27,8 @@ namespace WSC.UNITY.DEMO
                 }
             });
 
-            //Network.Initialize();
-            Network.Initialize(new global::WSC.UNITY.WebProtocolFactory());
+            //Network.i.Initialize();
+            Network.i.Initialize(new global::WSC.UNITY.WebProtocolFactory());
         }
 
         private void Start()

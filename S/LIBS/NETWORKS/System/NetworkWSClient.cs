@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 namespace WSC
 {
-    public sealed class NetworkWSClient : System<NetworkWSClient>
+    public sealed class NetworkWSClient : Singleton<NetworkWSClient>
     {
+        private IWebProtocolFactory factory = new WebProtocolFactory();
         private Dictionary<string, NetworkWS> sockets = new Dictionary<string, NetworkWS>();
         public event Action<NetworkResponse> OnMessage = delegate { };
         public event Action<NetworkResponse> OnClose = delegate { };
         public event Action<NetworkResponse> OnOpen = delegate { };
 
-        internal void Initialize()
+        internal void Initialize(IWebProtocolFactory factory = null)
         {
-            // N/A
+            if (factory != null)
+                this.factory = factory;
         }
 
         internal NetworkWSClient Query(RequestWS payload)
@@ -103,7 +105,7 @@ namespace WSC
         {
             if (sockets.TryGetValue(host, out var socket) == false)
             {
-                socket = new NetworkWS(host, cookies);
+                socket = new NetworkWS(host, cookies, factory);
                 socket.OnNotify += OnNotify;
                 socket.OnOpen += (response) => OnOpen(response);
                 socket.OnClose += (response) => OnClose(response);

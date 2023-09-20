@@ -12,7 +12,7 @@ namespace WSC.UNITY
     {
         public void Query(RequestW3 request, Action<NetworkResponse> callback)
         {
-            NetworkW3Client.i.StartCoroutine(OnQuery(request, callback));
+            Network.i.StartCoroutine(OnQuery(request, callback));
         }
 
         private IEnumerator OnQuery(RequestW3 request, Action<NetworkResponse> callback)

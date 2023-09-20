@@ -1,14 +1,7 @@
-#if UNITY_5_6_OR_NEWER
-#define UNITY
-#endif
-
-#if UNITY
 using UnityEngine;
-#endif
 
-namespace WSC
+namespace WSC.UNITY
 {
-#if UNITY
     public class System<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T instance = null;
@@ -62,9 +55,4 @@ namespace WSC
         public static bool IsNull => (instance == null);
         public static T i => Instance;
     }
-#else
-    public class System<T> : Singleton<T> where T : class
-    {
-    }
-#endif
 }
