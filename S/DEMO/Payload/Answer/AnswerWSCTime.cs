@@ -6,7 +6,7 @@ namespace DEMO
     {
         public double timestamp;
 
-        internal override void OnQuery(Request request)
+        public override void OnQuery(Request request)
         {
             base.OnQuery(request);
 

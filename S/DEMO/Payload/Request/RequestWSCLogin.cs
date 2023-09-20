@@ -14,12 +14,12 @@ namespace DEMO
         }
 
         [RuntimeInitialize]
-        internal static void Initialize()
+        private static void Initialize()
         {
             Register();
         }
 
-        internal override Answer OnQuery(object sender)
+        public override Answer OnQuery(object sender)
         {
             Log.Debug($"{nameof(udid)}:{udid}, {nameof(device)}:{device}");
 

@@ -20,7 +20,7 @@ namespace WSC
             NetworkWSClient.i.Query(this);
         }
 
-        internal override Request Query<T>(Action<T> callback = null)
+        public override Request Query<T>(Action<T> callback = null)
         {
             if (callback != null)
                 Done += new Action<Answer>(answer => callback((T)answer));
@@ -50,7 +50,7 @@ namespace WSC
             return this;
         }
 
-        [JsonIgnore] internal Dictionary<string, string> cookies = null;
-        [JsonIgnore] internal bool recovery = true;
+        [JsonIgnore] public Dictionary<string, string> cookies = null;
+        [JsonIgnore] public bool recovery = true;
     }
 }

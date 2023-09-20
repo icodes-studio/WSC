@@ -15,7 +15,7 @@ namespace DEMO.AWS.CHAT
 
         public List<UserInfo> users = new List<UserInfo>();
 
-        internal override void OnQuery(Request request)
+        public override void OnQuery(Request request)
         {
             base.OnQuery(request);
 

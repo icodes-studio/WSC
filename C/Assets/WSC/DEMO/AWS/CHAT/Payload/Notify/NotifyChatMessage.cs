@@ -12,12 +12,12 @@ namespace DEMO.AWS.CHAT
         public long timestamp;
 
         [RuntimeInitialize]
-        internal static void Initialize()
+        private static void Initialize()
         {
             Register();
         }
 
-        internal override void OnQuery(Request request)
+        public override void OnQuery(Request request)
         {
             base.OnQuery(request);
 

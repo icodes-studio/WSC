@@ -1,4 +1,4 @@
-﻿namespace WSC
+namespace WSC
 {
     public class NotifyWS<T> : Notify
     {

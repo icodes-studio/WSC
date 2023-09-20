@@ -22,8 +22,8 @@ namespace WSC
             UnityEngine.Application.runInBackground = true;
 #else
             timer = new((state) =>
-            {
-                NetworkWSClient.i.Update();
+            { 
+                NetworkWSClient.i.Update(); 
                 NetworkW3Client.i.Update();
             }, null, 0, 100);
 #endif

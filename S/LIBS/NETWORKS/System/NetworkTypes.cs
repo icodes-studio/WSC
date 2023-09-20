@@ -15,7 +15,7 @@
         Closed = 9004,
         Network = 9005,
         AlreadyExists = 9006,
-        InvalidTicket = 9007,
+        InvalidHost = 9007,
         NoData = 9008,
         Exception = 9009,
         Unknown = 9999,

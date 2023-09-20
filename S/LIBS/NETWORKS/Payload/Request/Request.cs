@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 
 namespace WSC
@@ -9,17 +9,17 @@ namespace WSC
         {
         }
 
-        internal virtual Request Query<T>(Action<T> callback = null) where T : Answer
+        public virtual Request Query<T>(Action<T> callback = null) where T : Answer
         {
             return this;
         }
 
-        internal virtual Answer OnQuery(object sender)
+        public virtual Answer OnQuery(object sender)
         {
             return null;
         }
 
         [JsonIgnore] public Action<Answer> Done = delegate { };
-        [JsonIgnore] internal string host = string.Empty;
+        [JsonIgnore] public string host = string.Empty;
     }
 }

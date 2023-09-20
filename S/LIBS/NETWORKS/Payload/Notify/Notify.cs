@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace WSC
@@ -6,7 +6,7 @@ namespace WSC
     public class Notify : Answer
     {
         public string command = string.Empty;
-        [JsonIgnore] internal string host = string.Empty;
-        [JsonIgnore] internal Dictionary<string, string> cookies = null;
+        [JsonIgnore] public string host = string.Empty;
+        [JsonIgnore] public Dictionary<string, string> cookies = null;
     }
 }

@@ -11,7 +11,7 @@ namespace WSC
             NetworkW3Client.i.Query(this);
         }
 
-        internal override Request Query<T>(Action<T> callback = null)
+        public override Request Query<T>(Action<T> callback = null)
         {
             if (callback != null)
                 Done += new Action<Answer>(answer => callback((T)answer));
@@ -41,10 +41,10 @@ namespace WSC
             return this;
         }
 
-        [JsonIgnore] internal string command { get; set; } = string.Empty;
-        [JsonIgnore] internal string method { get; set; } = WebRequest.POST;
-        [JsonIgnore] internal string uri => host + command;
-        [JsonIgnore] internal Dictionary<string, string> headers = null;
-        [JsonIgnore] internal int recovery = NetworkTypes.RecoveryCount;
+        [JsonIgnore] public string command { get; set; } = string.Empty;
+        [JsonIgnore] public string method { get; set; } = WebRequest.POST;
+        [JsonIgnore] public string uri => host + command;
+        [JsonIgnore] public Dictionary<string, string> headers = null;
+        [JsonIgnore] public int recovery = NetworkTypes.RecoveryCount;
     }
 }

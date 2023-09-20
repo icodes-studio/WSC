@@ -31,10 +31,10 @@ namespace WSC
 
     public sealed class WebProtocolFactory : IWebProtocolFactory
     {
-        public IWebRequest CreateWebRequest() =>
+        public IWebRequest CreateWebRequest() => 
             new WSC.WebRequest();
 
-        public IWebSocket CreateWebSocket(string uri, Dictionary<string, string> cookies) =>
+        public IWebSocket CreateWebSocket(string uri, Dictionary<string, string> cookies) => 
             new WSC.WebSocket(uri, cookies);
     }
 }

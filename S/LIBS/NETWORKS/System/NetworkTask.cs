@@ -19,11 +19,11 @@ namespace WSC
                     exception = new NetworkException(answer.error);
 
                 if (requests.Count == 0)
-                    Done?.Invoke(exception);
+                    Done(exception);
             };
             return this;
         }
 
-        public event Action<NetworkException> Done = null;
+        public event Action<NetworkException> Done = delegate { };
     }
 }
