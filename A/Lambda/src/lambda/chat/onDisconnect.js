@@ -5,7 +5,7 @@ exports.handler = async event => {
   var params = {
     TableName: 'chatapp-userlist',
     Key: {
-      connectionId: event.requestContext.connectionId
+      connection_id: event.requestContext.connectionId
     }
   };
   await docClient.delete(params).promise();

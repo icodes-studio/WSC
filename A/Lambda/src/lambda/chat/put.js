@@ -6,21 +6,20 @@ exports.handler = async (event, context) => {
 
     var params = {
         TableName: 'chatapp-userlist',
-        IndexName: 'roomId-userId-index',
+        IndexName: 'room_id-user_id-index',
         KeyConditionExpression: '#HashKey = :hkey',
-        ExpressionAttributeNames: { '#HashKey': 'roomId' },
+        ExpressionAttributeNames: { '#HashKey': 'room_id' },
         ExpressionAttributeValues: {
-            ':hkey': inputObject.roomId
+            ':hkey': inputObject.room_id
         }
     };
     const result = await docClient.query(params).promise();
     const now = moment().valueOf();
-
     const item = {
-        roomId: inputObject.roomId,
+        room_id: inputObject.room_id,
         timestamp: now,
         message: inputObject.text,
-        userId: inputObject.userId,
+        user_id: inputObject.user_id,
         name: inputObject.name,
     };
     var params = {
@@ -34,18 +33,18 @@ exports.handler = async (event, context) => {
         endpoint: `${process.env.socket_api_gateway_id}.execute-api.ap-northeast-2.amazonaws.com/dev`
     });
     if (result.Items) {
-        const postCalls = result.Items.map(async ({ connectionId }) => {
-            const dt = { ConnectionId: connectionId, Data: JSON.stringify(item) };
+        const postCalls = result.Items.map(async ({ connection_id }) => {
+            const dt = { ConnectionId: connection_id, Data: JSON.stringify(item) };
             try {
                 await apigwManagementApi.postToConnection(dt).promise();
             } catch (e) {
                 console.log(e);
                 if (e.statusCode === 410) {
-                    console.log(`Found stale connection, deleting ${connectionId}`);
+                    console.log(`Found stale connection, deleting ${connection_id}`);
                     var params = {
                         TableName: 'chatapp-userlist',
                         Key: {
-                            connectionId: connectionId
+                            connection_id: connection_id
                         }
                     };
                     await docClient.delete(params).promise();

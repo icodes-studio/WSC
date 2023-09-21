@@ -7,9 +7,9 @@ exports.handler = async function (event, context) {
     var params = {
         TableName: 'chatapp-chat-messages',
         KeyConditionExpression: '#HashKey = :hkey',
-        ExpressionAttributeNames: { '#HashKey': 'roomId' },
+        ExpressionAttributeNames: { '#HashKey': 'room_id' },
         ExpressionAttributeValues: {
-            ':hkey': event.queryStringParameters.roomId
+            ':hkey': event.queryStringParameters.room_id
         }
     };
     try {
@@ -37,6 +37,7 @@ exports.handler = async function (event, context) {
             },
             body: JSON.stringify("error")
         };
+        //console.log(response);
         return response;
     }
 }

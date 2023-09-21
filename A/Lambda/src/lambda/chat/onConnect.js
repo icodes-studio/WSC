@@ -5,9 +5,9 @@ exports.handler = async (event) => {
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     const item = {
-        roomId: inputObject.roomId,
-        connectionId: event.requestContext.connectionId,
-        userId: inputObject.userId,
+        room_id: inputObject.room_id,
+        connection_id: event.requestContext.connectionId,
+        user_id: inputObject.user_id,
         timestamp: moment().valueOf()
     }
     try {
