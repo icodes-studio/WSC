@@ -1,4 +1,7 @@
 using UnityEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using WSC;
 
 namespace DEMO.AWS.CHAT
@@ -28,9 +31,20 @@ namespace DEMO.AWS.CHAT
                 }
             });
 
+            WSC.Tools.JSON = JsonSerializer.CreateDefault(new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new SnakeCaseNamingStrategy
+                    {
+                        ProcessDictionaryKeys = true
+                    }
+                },
+            });
+            WSC.Tools.JSON.Converters.Add(new JavaScriptDateTimeConverter());
+            WSC.Tools.JSON.NullValueHandling = NullValueHandling.Ignore;
+
             WSC.UNITY.Network.i.Initialize();
-            //WSC.UNITY.Network.i.Initialize(new WSC.WebProtocolFactory());
-            //WSC.UNITY.Network.i.Initialize(new WSC.UNITY.WebProtocolFactory());
         }
 
         private void Start()

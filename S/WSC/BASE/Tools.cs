@@ -3,28 +3,21 @@ using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 
 namespace WSC
 {
     public static class Tools
     {
-        private static JsonSerializer JSON = null;
-
         static Tools()
         {
-            JSON = JsonSerializer.CreateDefault(new JsonSerializerSettings
-            {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = new SnakeCaseNamingStrategy
-                    {
-                        ProcessDictionaryKeys = true
-                    }
-                },
-            });
+            JSON = new JsonSerializer();
             JSON.Converters.Add(new JavaScriptDateTimeConverter());
             JSON.NullValueHandling = NullValueHandling.Ignore;
+        }
+
+        public static JsonSerializer JSON
+        { 
+            get; set;
         }
 
         public static string ToJson(object obj)
