@@ -11,7 +11,8 @@
 
 - **Developed & tested with**
     - Visual Studio 2022
-    - .NET 6.0
+    - .NET 5.0, 6.0, 7.0
+    - .NET standard 2.1
 
 - **Dependencies**
     - *Newtonsoft.Json (13.0.3)*
