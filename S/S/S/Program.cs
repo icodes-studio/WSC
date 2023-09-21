@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using WebSocketSharp.Server;
 
 namespace WSC.DEMO
@@ -78,6 +80,7 @@ namespace WSC.DEMO
                 var index = path.LastIndexOf('/');
                 var service = string.Empty;
                 var command = path;
+                var queries = string.Empty;
 
                 if (index > 0)
                 {
@@ -88,12 +91,32 @@ namespace WSC.DEMO
                 if (service != config.Service)
                     throw new NetworkException(NetworkError.CommandNotFound);
 
+                index = command.IndexOf('?');
+                if (index > 0)
+                {
+                    queries = command.Substring(index + 1);
+                    command = command.Substring(0, index);
+                }
+
                 var handler = FindHandler(command);
                 if (handler != null)
                 {
                     var content = string.Empty;
-                    using (var reader = new StreamReader(args.Request.InputStream))
-                        content = reader.ReadToEnd();
+                    if (args.Request.HttpMethod == WebRequest.GET)
+                    {
+                        StringBuilder json = new StringBuilder("{");
+                        NameValueCollection parameters = HttpUtility.ParseQueryString(queries);
+                        foreach (var key in parameters.AllKeys)
+                            json.Append($$""" "{{key}}":"{{parameters[key]}}",""");
+
+                        json.Append("}");
+                        content = json.ToString();
+                    }
+                    else
+                    {
+                        using (var reader = new StreamReader(args.Request.InputStream))
+                            content = reader.ReadToEnd();
+                    }
 
                     Log.Debug($"command: {command}, method: {args.Request.HttpMethod}, contents: {content}");
 

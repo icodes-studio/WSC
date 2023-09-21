@@ -22,6 +22,7 @@ namespace WSC.UNITY.DEMO
 #if W3C
             host = WSCInfo.W3Host;
             headers = WSCInfo.W3Headers;
+            method = global::WSC.WebRequest.GET;
 #else
             host = WSCInfo.WSHost;
             cookies = WSCInfo.WSCookies;

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA162791-9955-4A34-841E-6B70159CE5D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WSC.DEMO</RootNamespace>
+    <AssemblyName>WSC</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\WSC\BASE\Log.cs">
+      <Link>BASE\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\BASE\RuntimeInitializeAttribute.cs">
+      <Link>BASE\RuntimeInitializeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\BASE\Singleton.cs">
+      <Link>BASE\Singleton.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\BASE\Tools.cs">
+      <Link>BASE\Tools.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Answer\Answer.cs">
+      <Link>NETWORKS\Payload\Answer\Answer.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Answer\AnswerW3.cs">
+      <Link>NETWORKS\Payload\Answer\AnswerW3.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Answer\AnswerWS.cs">
+      <Link>NETWORKS\Payload\Answer\AnswerWS.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Notify\Notify.cs">
+      <Link>NETWORKS\Payload\Notify\Notify.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Notify\NotifyWS.cs">
+      <Link>NETWORKS\Payload\Notify\NotifyWS.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Request\Request.cs">
+      <Link>NETWORKS\Payload\Request\Request.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Request\RequestW3.cs">
+      <Link>NETWORKS\Payload\Request\RequestW3.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Payload\Request\RequestWS.cs">
+      <Link>NETWORKS\Payload\Request\RequestWS.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Protocols\WebProtocolFactory.cs">
+      <Link>NETWORKS\Protocols\WebProtocolFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Protocols\WebRequest.cs">
+      <Link>NETWORKS\Protocols\WebRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\Protocols\WebSocket.cs">
+      <Link>NETWORKS\Protocols\WebSocket.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkException.cs">
+      <Link>NETWORKS\System\NetworkException.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkResponse.cs">
+      <Link>NETWORKS\System\NetworkResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkTask.cs">
+      <Link>NETWORKS\System\NetworkTask.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkTypes.cs">
+      <Link>NETWORKS\System\NetworkTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkW3Client.cs">
+      <Link>NETWORKS\System\NetworkW3Client.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkWS.cs">
+      <Link>NETWORKS\System\NetworkWS.cs</Link>
+    </Compile>
+    <Compile Include="..\WSC\NETWORKS\System\NetworkWSClient.cs">
+      <Link>NETWORKS\System\NetworkWSClient.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -115,13 +115,6 @@ namespace WSC
             return socket;
         }
 
-        public void Update()
-        {
-            var backup = new Dictionary<string, NetworkWS>(sockets);
-            foreach (var socket in backup.Values)
-                socket.Dispatch();
-        }
-
         internal NetworkWSClient RegisterNotify(Type type)
         {
             var notify = Activator.CreateInstance(type) as Notify;
@@ -149,13 +142,20 @@ namespace WSC
             return this;
         }
 
-        internal NetworkWSClient Connect(string host, Dictionary<string, string> cookies = null)
+        public void Update()
+        {
+            var backup = new Dictionary<string, NetworkWS>(sockets);
+            foreach (var socket in backup.Values)
+                socket.Dispatch();
+        }
+
+        public NetworkWSClient Connect(string host, Dictionary<string, string> cookies = null)
         {
             Socket(host, cookies).Connect();
             return this;
         }
 
-        internal NetworkWSClient Close(string host)
+        public NetworkWSClient Close(string host)
         {
             if (sockets.TryGetValue(host, out var socket))
                 socket.Close();
@@ -163,7 +163,7 @@ namespace WSC
             return this;
         }
 
-        internal NetworkWSClient CloseAll()
+        public NetworkWSClient CloseAll()
         {
             var backup = new Dictionary<string, NetworkWS>(sockets);
             foreach (var socket in backup.Values)
