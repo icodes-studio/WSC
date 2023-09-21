@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d57b33d86c2fa4489b124ada3cebbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restID: mh6yhqjxlf
+  socketID: qbyx9x6cz8
 --- !u!1001 &1221693118
 PrefabInstance:
   m_ObjectHideFlags: 0
