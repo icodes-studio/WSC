@@ -2,7 +2,7 @@
     ● AWS DynamoDB+Lambda+API Gateway 조합으로 Serverless 채팅 서버 구축.
     ● Backend 로직 Lambda는 NodeJS 사용.
     ● Frontend는 Unity3D로 채팅 클라이언트 제작.
-    ● 이 문서는 AWS 서비스 구축을 중점적으로 설명한다.
+    ● 이 문서는 AWS 서비스 구축을 중점으로 설명한다.
 *https://youtu.be/SPtRdnB5wSE*
 
 
@@ -335,7 +335,7 @@
             }
         }
         ```
-    - ***API Gateway ID는 아래 콘솔에서 확인 할 수 있다.***
+    - ***API Gateway ID는 콘솔에서 확인 할 수 있다.***
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/AWS/Chat%20(API%2BLambda%2BDynamoDB)/Assets/40.png)
 
 　
