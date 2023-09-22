@@ -2,8 +2,6 @@
 
 *WebSocket Server+Client library*
 
-*https://github.com/icodes-studio/WSC*
-
 
 　
 
