@@ -149,7 +149,7 @@
     - Open your client project in the Unity Editor.
         > *https://github.com/icodes-studio/WSC/tree/main/C*
     - Enter the ***W3C*** scripting define symbol.
-        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc-server-w3c.png)
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc-define-symbol.png)
     - Load the WSC demo scene.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc.png)
     - Hit the play button, then you will see the RESTful WWW communications.
