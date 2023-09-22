@@ -50,14 +50,30 @@
             - *https://www.nuget.org/packages/WebSocketSharp-netstandard*
 
 
+　
+
+## # Gettting started
+
+- **SERVER BUILD & RUN**
+    - Open the solution file with Visual Studio and build the entire solution.
+        > *https://github.com/icodes-studio/WSC/blob/main/S/S.sln*
+    - Run S.exe from the output path.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/runserver.png)
+    - The server has successfully started.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/serverstarted.png)
 
 
+　
+
+- **CLIENT BUILD & RUN**
+    - Open your project in the Unity Editor.
+        > *https://github.com/icodes-studio/WSC/tree/main/C*
+    - Load the WSC demo scene.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc.png)
+    - Hit the play button, and it will exchange messages with the server.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-run.png)
 
 
-
-
-
-
-
+　
 
 - [*Build Serverless Chat App with Amazon API Gateway*](https://github.com/icodes-studio/WSC/blob/main/A/README.md)
