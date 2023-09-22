@@ -120,3 +120,29 @@
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-chat.png)
     - Hit the play button, and it will exchange messages with the AWS Chat server.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-run.png)
+
+
+　
+
+## # Testing the REST API
+
+- **SERVER BUILD & RUN**
+    - Open the project ***S*** Properties and build with the ***W3C*** compilation symbol.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc-server-w3c.png)
+    - Run ***"S.exe"*** from the output path.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/runserver.png)
+    - The server has successfully started.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/serverstarted.png)
+
+
+　
+
+- **CLIENT BUILD & RUN**
+    - Open your client project in the Unity Editor.
+        > *https://github.com/icodes-studio/WSC/tree/main/C*
+    - Enter the ***W3C*** scripting define symbol.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc-server-w3c.png)
+    - Load the WSC demo scene.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc.png)
+    - Hit the play button, and it will exchange the RESTful messages with the server.
+        > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-rest-run.png)
