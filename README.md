@@ -144,5 +144,5 @@
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc-server-w3c.png)
     - Load the WSC demo scene.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc.png)
-    - Hit the play button, and it will exchange the RESTful messages with the server.
+    - Hit the play button, then you will see the RESTful WWW communications.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-rest-run.png)
