@@ -85,7 +85,7 @@
 　
 
 - **Enter your API Gateway IDs**
-        - *source:* *https://github.com/icodes-studio/WSC/blob/main/C/Assets/WSC/DEMO/AWS/CHAT/ChatInfo.cs*
+    - *source:* *https://github.com/icodes-studio/WSC/blob/main/C/Assets/WSC/DEMO/AWS/CHAT/ChatInfo.cs*
         ```csharp
         using System.Diagnostics;
         using UnityEngine;
