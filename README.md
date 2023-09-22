@@ -105,9 +105,9 @@
             }
         }
         ```
-        > - *RestID:* Enter ***chatapp-rest***'s *API ID*
-        > - *SocketID:* Enter ***chatapp-websocket***'s *API ID*
-    - ***You can check your API-Gateway-ID out in the AWS console.***
+        > - RestID: Enter ***chatapp-rest's*** API ID
+        > - SocketID: Enter ***chatapp-websocket's*** API ID
+    - **You can check your API-Gateway-ID out in the AWS console.**
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/AWS/Chat%20(API%2BLambda%2BDynamoDB)/Assets/40.png)
 
 
