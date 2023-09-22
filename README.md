@@ -9,6 +9,7 @@
 ## # Environment
 
 - **Client**
+    - *https://github.com/icodes-studio/WSC/tree/main/C*
     - **Developed & tested with**
         - Unity 2022.3.4f1
         - Unity 2021.3.29f1
@@ -33,6 +34,7 @@
 　
 
 - **Server**
+    - *https://github.com/icodes-studio/WSC/tree/main/S*
     - **Developed & tested with**
         - Visual Studio 2022
         - S.exe: .NET 5.0, 6.0, 7.0
