@@ -132,7 +132,7 @@
 
 　
 
-## # Testing the REST API
+## # Testing the RESTful API
 
 - **SERVER BUILD & RUN**
     - Open the project ***S*** Properties and build with the ***W3C*** compilation symbol.
