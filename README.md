@@ -1,6 +1,6 @@
 ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc.png)
 
-*WebSocket Server+Client library*
+_**W**ebsocket **S**erver+**C**lient library_
 
 
 　
