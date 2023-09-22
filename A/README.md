@@ -324,8 +324,8 @@
         {
             public static class ChatInfo
             {
-                const string RestID = "***"; // REST API ID
-                const string SocketID = "***"; // WEBSOCKET API ID
+                const string RestID = "YOUR-REST-ID";
+                const string SocketID = "YOUR-SOCKET-ID";
 
                 public static string NAME => SystemInfo.deviceName;
                 public static string UID => Process.GetCurrentProcess().Id.ToString();
