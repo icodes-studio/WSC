@@ -100,7 +100,7 @@
 
 　
 
-## # Building steps
+## # Build steps
 
 - ***Creating an IAM Role***
 - ***Creating DynamoDB tables***
