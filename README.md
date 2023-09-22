@@ -6,6 +6,8 @@
 
 　
 
+　
+
 ## # Environment
 
 - **CLIENT**
@@ -52,6 +54,8 @@
 
 　
 
+　
+
 ## # Gettting started
 
 - **SERVER BUILD & RUN**
@@ -73,6 +77,8 @@
     - Hit the play button, and it will exchange messages with the server.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-run.png)
 
+
+　
 
 　
 
@@ -121,6 +127,8 @@
     - Hit the play button, and it will exchange messages with the AWS Chat server.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-run.png)
 
+
+　
 
 　
 
