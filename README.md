@@ -56,7 +56,7 @@ _**W**ebsocket **S**erver+**C**lient library_
 ## # Gettting started
 
 - **SERVER BUILD & RUN**
-    - Open the solution and build with Visual Studio
+    - Open the solution and build it with Visual Studio
         > *https://github.com/icodes-studio/WSC/blob/main/S/S.sln*
     - Run ***"S.exe"*** from the output path.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/runserver.png)
