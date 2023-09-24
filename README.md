@@ -56,7 +56,7 @@ _**W**ebsocket **S**erver+**C**lient library_
 ## # Gettting started
 
 - **SERVER BUILD & RUN**
-    - Open the solution file with Visual Studio and build the entire solution.
+    - Open the solution and build with Visual Studio
         > *https://github.com/icodes-studio/WSC/blob/main/S/S.sln*
     - Run ***"S.exe"*** from the output path.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/runserver.png)
@@ -71,7 +71,7 @@ _**W**ebsocket **S**erver+**C**lient library_
         > *https://github.com/icodes-studio/WSC/tree/main/C*
     - Load the WSC demo scene.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc.png)
-    - Hit the play button, and it will exchange messages with the server.
+    - The demo will show you how to exchange messages with the server.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-run.png)
 
 
@@ -110,7 +110,7 @@ _**W**ebsocket **S**erver+**C**lient library_
         ```
         > - RestID: Enter ***chatapp-rest's*** API ID
         > - SocketID: Enter ***chatapp-websocket's*** API ID
-    - **You can check your API-Gateway-ID out in the AWS console.**
+    - **You can check your API-Gateway-ID with the AWS console.**
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/AWS/Chat%20(API%2BLambda%2BDynamoDB)/Assets/40.png)
 
 
@@ -121,7 +121,7 @@ _**W**ebsocket **S**erver+**C**lient library_
         > *https://github.com/icodes-studio/WSC/tree/main/C*
     - Load the CHAT demo scene.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-chat.png)
-    - Hit the play button, and it will exchange messages with the AWS Chat server.
+    - The demo will show you how to exchange messages with the AWS Chat server.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/unity-wsc-run.png)
 
 
@@ -132,7 +132,7 @@ _**W**ebsocket **S**erver+**C**lient library_
 ## # Testing the RESTful API
 
 - **SERVER BUILD & RUN**
-    - Open the project ***S*** Properties and build with the ***W3C*** compilation symbol.
+    - Open the properies window from the project ***S*** and build it with the ***W3C*** compilation symbol.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc-server-w3c.png)
     - Run ***"S.exe"*** from the output path.
         > ![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/runserver.png)
