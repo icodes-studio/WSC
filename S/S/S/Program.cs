@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -104,13 +103,12 @@ namespace WSC.DEMO
                     var content = string.Empty;
                     if (args.Request.HttpMethod == WebRequest.GET)
                     {
-                        StringBuilder json = new StringBuilder("{");
-                        NameValueCollection parameters = HttpUtility.ParseQueryString(queries);
+                        var parameters = HttpUtility.ParseQueryString(queries);
+                        var payload = new StringBuilder("{");
                         foreach (var key in parameters.AllKeys)
-                            json.Append($$""" "{{key}}":"{{parameters[key]}}",""");
-
-                        json.Append("}");
-                        content = json.ToString();
+                            payload.Append($@"""{key}"":""{parameters[key]}"",");
+                        payload.Append("}");
+                        content = payload.ToString();
                     }
                     else
                     {
