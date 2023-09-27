@@ -32,9 +32,9 @@ namespace WSC.DEMO
         protected static void Register()
         {
 #if W3C
-            Program.i.RegisterHandler((Activator.CreateInstance(typeof(T)) as RequestW3).command, typeof(T));
+            App.i.RegisterHandler((Activator.CreateInstance(typeof(T)) as RequestW3).command, typeof(T));
 #else
-            Program.i.RegisterHandler((Activator.CreateInstance(typeof(T)) as RequestWS).command, typeof(T));
+            App.i.RegisterHandler((Activator.CreateInstance(typeof(T)) as RequestWS).command, typeof(T));
 #endif
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace WSC.DEMO
 {
-    public sealed class Network : System<Network>
+    internal sealed class Network : System<Network>
     {
         public void Initialize(IWebProtocolFactory factory = null)
         {

@@ -4,7 +4,7 @@ using WebSocketSharp.Server;
 
 namespace WSC.DEMO
 {
-    class WSC : WebSocketBehavior
+    internal class WSC : WebSocketBehavior
     {
         protected override void OnOpen()
         {
@@ -35,7 +35,7 @@ namespace WSC.DEMO
                     }
                     else
                     {
-                        var handler = Program.i.FindHandler(request.command);
+                        var handler = App.i.FindHandler(request.command);
                         if (handler != null)
                         {
                             request =

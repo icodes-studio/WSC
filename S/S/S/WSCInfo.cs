@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace WSC.DEMO
 {
-    public static class WSCInfo
+    internal static class WSCInfo
     {
         private static TimeSpan time = new TimeSpan();
         public static DateTime Time

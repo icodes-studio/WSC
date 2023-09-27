@@ -9,7 +9,7 @@ using WebSocketSharp.Server;
 
 namespace WSC.DEMO
 {
-    class Program : Singleton<Program>
+    internal sealed class App : Singleton<App>
     {
         private object sync = new();
         private HttpServer server = null;
@@ -22,8 +22,8 @@ namespace WSC.DEMO
             base.Awake();
 
             Trace.Listeners.Add(new ConsoleTraceListener());
-            config = Tools.FromJson<AppConfig>(File.ReadAllText(Tools.FullPath("S.Config.json")));
-            Log.Initialize(config.LogPath, nameof(WSC), config.LogLevel, (_, message) => Trace.WriteLine(message));
+            config = Tools.FromJson<AppConfig>(File.ReadAllText(Tools.FullPath("AppConfig.json")));
+            Log.Initialize(config.LogPath, nameof(WSC), config.LogLevel, (level, message) => Trace.WriteLine(message));
 
             Network.i.Initialize();
         }
@@ -105,8 +105,10 @@ namespace WSC.DEMO
                     {
                         var parameters = HttpUtility.ParseQueryString(queries);
                         var payload = new StringBuilder("{");
+
                         foreach (var key in parameters.AllKeys)
                             payload.Append($@"""{key}"":""{parameters[key]}"",");
+
                         payload.Append("}");
                         content = payload.ToString();
                     }
@@ -283,12 +285,12 @@ namespace WSC.DEMO
 #endif
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (i.Start() == false)
                 return;
 
-            Console.WriteLine("\nType 'exit' to stop the server.\n");
+            Console.WriteLine("\nType 'exit' to stop this server.\n");
 
             while (true)
             {

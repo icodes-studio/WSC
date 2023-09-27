@@ -2,7 +2,7 @@ using System.Threading;
 
 namespace WSC.DEMO
 {
-    public class System<T> : Singleton<T> where T : class
+    internal class System<T> : Singleton<T> where T : class
     {
         private static Timer timer;
 

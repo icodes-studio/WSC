@@ -1,0 +1,7 @@
+{
+    "Environment": "LOCAL",
+    "LogPath": "C:\\LOG\\",
+    "LogLevel": "Debug",
+    "Service": "/WSC",
+    "Port": 4649
+}
