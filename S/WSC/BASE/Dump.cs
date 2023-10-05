@@ -50,8 +50,6 @@ namespace WSC
                     var enumerable = element as IEnumerable;
                     if (enumerable != null)
                     {
-                        ToString("...");
-
                         foreach (object item in enumerable)
                         {
                             if (item is IEnumerable && !(item is string))
