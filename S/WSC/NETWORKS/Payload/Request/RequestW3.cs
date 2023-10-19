@@ -6,9 +6,10 @@ namespace WSC
 {
     public class RequestW3 : Request
     {
-        public override void Query()
+        public override Request Query()
         {
             NetworkW3Client.i.Query(this);
+            return this;
         }
 
         public override Request Query<T>(Action<T> callback = null)

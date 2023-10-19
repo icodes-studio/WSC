@@ -5,8 +5,9 @@ namespace WSC
 {
     public class Request
     {
-        public virtual void Query()
+        public virtual Request Query()
         {
+            return this;
         }
 
         public virtual Request Query<T>(Action<T> callback = null) where T : Answer

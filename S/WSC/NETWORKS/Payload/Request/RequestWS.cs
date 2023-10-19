@@ -15,9 +15,10 @@ namespace WSC
             index = Guid.NewGuid().ToString();
         }
 
-        public override void Query()
+        public override Request Query()
         {
             NetworkWSClient.i.Query(this);
+            return this;
         }
 
         public override Request Query<T>(Action<T> callback = null)
