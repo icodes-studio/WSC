@@ -86,17 +86,26 @@ namespace WSC
         {
             if (response.Exception == null)
             {
-                var notify =
-                    typeof(Tools)
-                    .GetMethod("FromJson")
-                    .MakeGenericMethod(response.DataType)
-                    .Invoke(null, new object[] { response.Data }) as Notify;
-
-                if (notify != null)
+                Notify notify = null;
+                try
                 {
-                    Log.Debug($"WEBSOCKET notify: {response.Data}");
-                    notify.host = (response.Sender as NetworkWS)?.Uri.ToString() ?? string.Empty;
-                    notify.OnQuery(null);
+                    notify = typeof(Tools)
+                        .GetMethod("FromJson")
+                        .MakeGenericMethod(response.DataType)
+                        .Invoke(null, new object[] { response.Data }) as Notify;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+                finally
+                {
+                    if (notify != null)
+                    {
+                        Log.Debug($"WEBSOCKET notify: {response.Data}");
+                        notify.host = (response.Sender as NetworkWS)?.Uri.ToString() ?? string.Empty;
+                        notify.OnQuery(null);
+                    }
                 }
             }
         }
