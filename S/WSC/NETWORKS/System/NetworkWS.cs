@@ -86,6 +86,8 @@ namespace WSC
 
         protected virtual void OnSocketMessage(string message)
         {
+            Log.Debug($"WEBSOCKET message: {message}");
+
             if (OnHandleAnswer(message))
                 return;
 
