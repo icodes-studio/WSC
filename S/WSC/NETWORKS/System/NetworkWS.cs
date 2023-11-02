@@ -17,6 +17,7 @@ namespace WSC
         internal event Action<NetworkResponse> OnNotify = delegate { };
         internal event Action<NetworkResponse> OnMessage = delegate { };
         internal event Action<NetworkResponse> OnClose = delegate { };
+        internal event Action<NetworkResponse> OnRestore = delegate { };
         internal event Action<NetworkResponse> OnOpen = delegate { };
 
         private class Pending
@@ -72,7 +73,7 @@ namespace WSC
 
                 messages.Enqueue(new Message()
                 {
-                    callback = OnOpen,
+                    callback = recoveryCount < NetworkTypes.RecoveryCount ? OnRestore : OnOpen,
                     response = new NetworkResponse()
                     {
                         Data = socket.Uri.ToString(),

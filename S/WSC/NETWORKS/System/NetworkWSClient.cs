@@ -9,6 +9,7 @@ namespace WSC
         private Dictionary<string, NetworkWS> sockets = new Dictionary<string, NetworkWS>();
         public event Action<NetworkResponse> OnMessage = delegate { };
         public event Action<NetworkResponse> OnClose = delegate { };
+        public event Action<NetworkResponse> OnRestore = delegate { };
         public event Action<NetworkResponse> OnOpen = delegate { };
 
         public void Initialize(IWebProtocolFactory factory = null)
@@ -117,6 +118,7 @@ namespace WSC
                 socket = new NetworkWS(host, cookies, factory);
                 socket.OnNotify += OnNotify;
                 socket.OnOpen += (response) => OnOpen(response);
+                socket.OnRestore += (response) => OnRestore(response);
                 socket.OnClose += (response) => OnClose(response);
                 socket.OnMessage += (response) => OnMessage(response);
                 sockets.Add(host, socket);
@@ -162,6 +164,11 @@ namespace WSC
         {
             Socket(host, cookies).Connect();
             return this;
+        }
+
+        public bool IsConnected(string host)
+        {
+            return (sockets.TryGetValue(host, out var socket)) ? socket.State == NetworkWS.STATE.Connected : false;
         }
 
         public NetworkWSClient Close(string host)
