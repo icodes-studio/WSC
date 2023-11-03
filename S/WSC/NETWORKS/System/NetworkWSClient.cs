@@ -7,10 +7,11 @@ namespace WSC
     {
         private IWebProtocolFactory factory = new WebProtocolFactory();
         private Dictionary<string, NetworkWS> sockets = new Dictionary<string, NetworkWS>();
-        public event Action<NetworkResponse> OnMessage = delegate { };
-        public event Action<NetworkResponse> OnClose = delegate { };
-        public event Action<NetworkResponse> OnRestore = delegate { };
-        public event Action<NetworkResponse> OnOpen = delegate { };
+        public Action<NetworkResponse> OnMessage = delegate { };
+        public Action<NetworkResponse> OnClose = delegate { };
+        public Action<NetworkResponse> OnOpen = delegate { };
+        public Action<NetworkResponse> OnRestore = delegate { };
+        public Action<NetworkResponse> OnLost = delegate { };
 
         public void Initialize(IWebProtocolFactory factory = null)
         {
@@ -118,9 +119,10 @@ namespace WSC
                 socket = new NetworkWS(host, cookies, factory);
                 socket.OnNotify += OnNotify;
                 socket.OnOpen += (response) => OnOpen(response);
-                socket.OnRestore += (response) => OnRestore(response);
                 socket.OnClose += (response) => OnClose(response);
                 socket.OnMessage += (response) => OnMessage(response);
+                socket.OnRestore += (response) => OnRestore(response);
+                socket.OnLost += (response) => OnLost(response);
                 sockets.Add(host, socket);
             }
             return socket;

@@ -17,8 +17,9 @@ namespace WSC
         internal event Action<NetworkResponse> OnNotify = delegate { };
         internal event Action<NetworkResponse> OnMessage = delegate { };
         internal event Action<NetworkResponse> OnClose = delegate { };
-        internal event Action<NetworkResponse> OnRestore = delegate { };
         internal event Action<NetworkResponse> OnOpen = delegate { };
+        internal event Action<NetworkResponse> OnRestore = delegate { };
+        internal event Action<NetworkResponse> OnLost = delegate { };
 
         private class Pending
         {
@@ -87,42 +88,42 @@ namespace WSC
 
         protected virtual void OnSocketMessage(string message)
         {
-            if (OnHandleAnswer(message))
-                return;
+            lock (sync)
+            {
+                if (OnHandleAnswer(message))
+                    return;
 
-            if (OnHandleNotify(message))
-                return;
+                if (OnHandleNotify(message))
+                    return;
+            }
         }
 
         private bool OnHandleAnswer(string data)
         {
             try
             {
-                lock (sync)
+                var answer = Tools.FromJson<AnswerWS>(data);
+                if (answer == null)
+                    return false;
+
+                var index = answer.index;
+                if (string.IsNullOrEmpty(index))
+                    return false;
+
+                if (callbacks.TryGetValue(index, out var callback) == false)
+                    return false;
+
+                messages.Enqueue(new Message()
                 {
-                    var answer = Tools.FromJson<AnswerWS>(data);
-                    if (answer == null)
-                        return false;
-
-                    var index = answer.index;
-                    if (string.IsNullOrEmpty(index))
-                        return false;
-
-                    if (callbacks.TryGetValue(index, out var callback) == false)
-                        return false;
-
-                    messages.Enqueue(new Message()
+                    callback = callback,
+                    response = new NetworkResponse()
                     {
-                        callback = callback,
-                        response = new NetworkResponse()
-                        {
-                            Data = data,
-                            Sender = this,
-                        }
-                    });
+                        Data = data,
+                        Sender = this,
+                    }
+                });
 
-                    callbacks.Remove(index);
-                }
+                callbacks.Remove(index);
             }
             catch (Exception e)
             {
@@ -137,26 +138,23 @@ namespace WSC
         {
             try
             {
-                lock (sync)
+                var notify = Tools.FromJson<Notify>(data);
+                if (notify == null)
+                    return false;
+
+                var command = notify.command ?? string.Empty;
+                if (!notifications.TryGetValue(command, out var notification))
+                    return false;
+
+                messages.Enqueue(new Message()
                 {
-                    var notify = Tools.FromJson<Notify>(data);
-                    if (notify == null)
-                        return false;
-
-                    var command = notify.command ?? string.Empty;
-                    if (!notifications.TryGetValue(command, out var notification))
-                        return false;
-
-                    messages.Enqueue(new Message()
+                    response = new NetworkResponse()
                     {
-                        response = new NetworkResponse()
-                        {
-                            Data = data,
-                            DataType = notification,
-                            Sender = this,
-                        }
-                    });
-                }
+                        Data = data,
+                        DataType = notification,
+                        Sender = this,
+                    }
+                });
             }
             catch (Exception e)
             {
@@ -203,6 +201,16 @@ namespace WSC
 
                     if (recoveryCount > 0)
                     {
+                        messages.Enqueue(new Message()
+                        {
+                            callback = OnLost,
+                            response = new NetworkResponse()
+                            {
+                                Data = socket.Uri.ToString(),
+                                Sender = this
+                            }
+                        });
+
                         Connect(true);
                     }
                     else
@@ -260,7 +268,10 @@ namespace WSC
 
         internal void Connect()
         {
-            Connect(false);
+            lock (sync)
+            {
+                Connect(false);
+            }
         }
 
         internal void Close()
@@ -280,42 +291,45 @@ namespace WSC
 
         internal void Send(string payload, string index, bool recovery, Action<NetworkResponse> callback)
         {
-            if (State == STATE.Connected)
+            lock (sync)
             {
-                if (callback != null)
-                    callbacks.Add(index, callback);
+                if (State == STATE.Connected)
+                {
+                    if (callback != null)
+                        callbacks.Add(index, callback);
 
-                try
-                {
-                    socket.Send(payload, result =>
+                    try
                     {
-                        if (result == false)
+                        socket.Send(payload, result =>
                         {
-                            callbacks.Remove(index);
-                            OnSendFail(callback);
-                        }
-                    });
+                            if (result == false)
+                            {
+                                callbacks.Remove(index);
+                                OnSendFail(callback);
+                            }
+                        });
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Warning(e);
+                        OnSendFail(callback);
+                    }
                 }
-                catch (Exception e)
+                else if (recovery == true)
                 {
-                    Log.Warning(e);
+                    pendings.Enqueue(new Pending()
+                    {
+                        index = index,
+                        request = payload,
+                        callback = callback
+                    });
+
+                    Connect(false);
+                }
+                else
+                {
                     OnSendFail(callback);
                 }
-            }
-            else if (recovery == true)
-            {
-                pendings.Enqueue(new Pending()
-                {
-                    index = index,
-                    request = payload,
-                    callback = callback
-                });
-
-                Connect(false);
-            }
-            else
-            {
-                OnSendFail(callback);
             }
         }
 
