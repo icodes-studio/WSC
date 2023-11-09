@@ -34,23 +34,23 @@ namespace WSC.UNITY.DEMO
         {
             NetworkWSClient.i.OnOpen = (response) =>
             {
-                Log.Warning("OnOpen");
+                Log.Debug("OnOpen");
             };
 
             NetworkWSClient.i.OnLost = (response) =>
             {
-                Log.Warning("OnLost");
+                Log.Debug("OnLost");
             };
 
             NetworkWSClient.i.OnRestore = (response) =>
             {
-                Log.Warning("OnRestore");
+                Log.Debug("OnRestore");
                 new RequestWSCLogin().Query();
             };
 
             NetworkWSClient.i.OnClose = (response) =>
             {
-                Log.Warning("OnClose");
+                Log.Debug("OnClose");
                 new RequestWSCLogin().Query();
             };
 

@@ -79,7 +79,7 @@ namespace WSC
                 request.recovery,
                 response =>
                 {
-                    Log.Debug($"WEBSOCKET response: {response.Data}, error: {response.Exception?.HResult}");
+                    Log.Debug($"WEBSOCKET response:{response.Data}, error:{response.Exception?.HResult}");
                     callback?.Invoke(response);
                 });
         }
@@ -104,7 +104,7 @@ namespace WSC
                 {
                     if (notify != null)
                     {
-                        Log.Debug($"WEBSOCKET notify: {response.Data}");
+                        Log.Debug($"WEBSOCKET notify:{response.Data}");
                         notify.host = (response.Sender as NetworkWS)?.Uri.ToString() ?? string.Empty;
                         notify.OnQuery(null);
                     }
@@ -176,7 +176,10 @@ namespace WSC
         public NetworkWSClient Close(string host)
         {
             if (sockets.TryGetValue(host, out var socket))
+            {
                 socket.Close();
+                sockets.Remove(host);
+            }
 
             return this;
         }
@@ -186,6 +189,8 @@ namespace WSC
             var backup = new Dictionary<string, NetworkWS>(sockets);
             foreach (var socket in backup.Values)
                 socket.Close();
+
+            sockets.Clear();
 
             return this;
         }
