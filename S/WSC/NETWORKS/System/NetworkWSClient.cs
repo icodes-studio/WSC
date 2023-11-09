@@ -15,6 +15,8 @@ namespace WSC
 
         public void Initialize(IWebProtocolFactory factory = null)
         {
+            CloseAll();
+
             if (factory != null)
                 this.factory = factory;
         }
