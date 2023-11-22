@@ -94,7 +94,7 @@ namespace WSC
 
         private HttpWebRequest WWW(RequestW3 payload)
         {
-            HttpWebRequest www = payload.method switch
+            var www = payload.method switch
             {
                 GET => Get(payload),
                 DELETE => Delete(payload),
@@ -128,14 +128,14 @@ namespace WSC
                 }
             }
 
-            HttpWebRequest www = (HttpWebRequest)System.Net.WebRequest.Create(uri);
+            var www = (HttpWebRequest)System.Net.WebRequest.Create(uri);
             www.Method = GET;
             return www;
         }
 
         private HttpWebRequest Delete(RequestW3 payload)
         {
-            HttpWebRequest www = (HttpWebRequest)System.Net.WebRequest.Create(payload.uri);
+            var www = (HttpWebRequest)System.Net.WebRequest.Create(payload.uri);
             www.Method = DELETE;
             return www;
         }
