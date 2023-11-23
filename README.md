@@ -49,3 +49,8 @@
             - *https://github.com/PingmanTools/websocket-sharp*
             - *https://www.nuget.org/packages/WebSocketSharp-netstandard*
 
+
+　
+
+## # Release note
+
