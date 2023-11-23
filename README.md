@@ -1,6 +1,7 @@
-![](https://github.com/icodes-studio/wiki/blob/main/STUDY%2BRND/Assets/wsc.png)
+# WSC
 
-_**W**ebsocket **S**erver+**C**lient_
+- **W**ebsocket **S**erver **C**lient
+- [**Documents**](https://www.notion.so/WSC-fb7b012028b3428fbcdb44ebe94f1452)
 
 
 　
