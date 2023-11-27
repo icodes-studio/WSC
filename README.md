@@ -54,5 +54,5 @@
 
 ## # Release note
 
-- **Version 1.0.0 : July 12, 2017**
+- **Version 1.0.0 : July 12, 2020**
     - First release
